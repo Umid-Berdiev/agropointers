@@ -1,0 +1,185 @@
+<script setup>
+import { indexOf } from "lodash";
+
+const props = defineProps({
+    selectedLayers: {
+        type: Array,
+        default: () => [],
+    },
+});
+const emits = defineEmits(["update:selectedLayers"]);
+
+function onChange(event) {
+    const value = event.target.value;
+    let tempArr = props.selectedLayers;
+    const idx = indexOf(tempArr, value);
+
+    if (idx !== -1) {
+        tempArr.splice(idx, 1);
+    } else tempArr.push(value);
+    // if (tempArr.includes(value)) {
+    //     tempArr = tempArr.filter((item) => item !== value);
+    // } else tempArr.push(value);
+
+    emits("update:selectedLayers", tempArr);
+}
+</script>
+
+<template>
+    <div id="soil_layers_control" class="bg-white p-3 rounded-1 text-secondary">
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                id="kuzatuvQuduqlariSwitch"
+                :checked="selectedLayers.includes('kuzatuvQuduqlari')"
+                value="kuzatuvQuduqlari"
+                @change="onChange"
+            />
+            <label class="form-check-label w-100" for="kuzatuvQuduqlariSwitch">
+                <div class="d-flex">
+                    <span>Kuzatuv quduqlari</span>
+                    <i class="fa fa-circle text-secondary ms-auto my-auto"></i>
+                </div>
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                id="kollektorlarSwitch"
+                :checked="selectedLayers.includes('kollektorlar')"
+                value="kollektorlar"
+                @change="onChange"
+            />
+            <label class="form-check-label w-100" for="kollektorlarSwitch">
+                <div class="d-flex">
+                    <span>Kollektorlar</span>
+                    <div
+                        class="border border-success ms-auto my-auto horizontal-line"
+                    ></div>
+                </div>
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                id="sugorishTarmoqlariSwitch"
+                :checked="selectedLayers.includes('sugorishTarmoqlari')"
+                value="sugorishTarmoqlari"
+                @change="onChange"
+            />
+            <label
+                class="form-check-label w-100"
+                for="sugorishTarmoqlariSwitch"
+            >
+                <div class="d-flex">
+                    <span class="me-3">Sug'orish tarmoqlari</span>
+                    <div
+                        class="border border-primary ms-auto my-auto horizontal-line"
+                    ></div>
+                </div>
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                id="yollarSwitch"
+                :checked="selectedLayers.includes('yollar')"
+                value="yollar"
+                @change="onChange"
+            />
+            <label class="form-check-label w-100" for="yollarSwitch">
+                <div class="d-flex">
+                    <span>Yo'llar</span>
+                    <div
+                        class="border border-secondary ms-auto my-auto horizontal-line"
+                    ></div>
+                </div>
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                id="boshqaYerlarSwitch"
+                :checked="selectedLayers.includes('boshqaYerlar')"
+                value="boshqaYerlar"
+                @change="onChange"
+            />
+            <label class="form-check-label w-100" for="boshqaYerlarSwitch">
+                <div class="d-flex">
+                    <span>Boshqa yerlar</span>
+                    <div class="ms-auto my-auto rectangle-boshqayerlar"></div>
+                </div>
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                id="aholiSwitch"
+                :checked="selectedLayers.includes('aholi')"
+                value="aholi"
+                @change="onChange"
+            />
+            <label class="form-check-label w-100" for="aholiSwitch">
+                <div class="d-flex">
+                    <span>Aholi</span>
+                    <div class="ms-auto my-auto rectangle-aholi"></div>
+                </div>
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                id="chegaralarSwitch"
+                :checked="selectedLayers.includes('chegaralar')"
+                value="chegaralar"
+                @change="onChange"
+            />
+            <label class="form-check-label w-100" for="chegaralarSwitch">
+                <div class="d-flex">
+                    <span>Chegaralar</span>
+                    <div class="ms-auto my-auto rectangle-lightgray"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+</template>
+
+<style lang="scss" scoped>
+#soil_layers_control {
+    border: 2px solid lightgray;
+    position: absolute;
+    top: 5.25rem;
+    left: 0.6rem;
+    z-index: 800;
+}
+
+.rectangle-lightgray {
+    width: 1.5rem;
+    height: 1rem;
+    background-color: lightgray;
+}
+
+.rectangle-aholi {
+    width: 1.5rem;
+    height: 1rem;
+    background-color: #beb297;
+}
+
+.rectangle-boshqayerlar {
+    width: 1.5rem;
+    height: 1rem;
+    background-color: #c43c39;
+}
+
+.horizontal-line {
+    width: 2rem;
+    height: 0.1rem;
+}
+</style>
