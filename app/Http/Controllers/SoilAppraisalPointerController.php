@@ -102,7 +102,7 @@ class SoilAppraisalPointerController extends Controller
             ]);
         }
 
-        Excel::import(SoilAppraisalPointerImport::class, $request->file('import_file'));
+        Excel::import(new SoilAppraisalPointerImport, $request->file('import_file'));
 
         SoilDataLog::create([
             'type' => 'SoilAppraisalPointer',

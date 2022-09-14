@@ -102,7 +102,7 @@ class SoilSalinityPointerController extends Controller
             ]);
         }
 
-        Excel::import(SoilSalinityPointerImport::class, $request->file('import_file'));
+        Excel::import(new SoilSalinityPointerImport, $request->file('import_file'));
 
         SoilDataLog::create([
             'type' => 'SoilSalinityPointer',

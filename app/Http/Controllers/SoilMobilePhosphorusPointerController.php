@@ -102,7 +102,7 @@ class SoilMobilePhosphorusPointerController extends Controller
             ]);
         }
 
-        Excel::import(SoilMobilePhosphorusPointerImport::class, $request->file('import_file'));
+        Excel::import(new SoilMobilePhosphorusPointerImport, $request->file('import_file'));
 
         SoilDataLog::create([
             'type' => 'SoilMobilePhosphorusPointer',

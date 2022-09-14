@@ -1,18 +1,15 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 import { Dataset, DatasetItem, DatasetInfo, DatasetPager } from "vue-dataset";
 
 const props = defineProps({
-    soilData: {
+    data: {
         type: Array,
         default: () => [],
     },
+    labelType: "",
 });
 const columns = reactive([
-    // {
-    //     name: "Value",
-    //     field: "value",
-    // },
     {
         name: "Gumus amount (%)",
         field: "gumus_amount",
@@ -22,12 +19,15 @@ const columns = reactive([
         field: "area",
     },
 ]);
-const soilDataAreaTotal = ref(
-    props.soilData.reduce((acc, cur) => acc + Number(cur.area), 0)
+
+const soilDataAreaTotal = computed(
+    () =>
+        props.data.length &&
+        props.data.reduce((acc, cur) => acc + Number(cur.area), 0)
 );
 
 function areaInPercent(rowAreaValue) {
-    // console.log({ soilDataAreaTotal });
+    console.log({ soilDataAreaTotal });
     return ((rowAreaValue / soilDataAreaTotal.value) * 100).toFixed(2);
 }
 </script>
@@ -39,7 +39,7 @@ function areaInPercent(rowAreaValue) {
                 <thead></thead>
             </table>
         </div> -->
-        <Dataset v-slot="{ ds }" :ds-data="soilData">
+        <Dataset v-slot="{ ds }" :ds-data="data">
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
@@ -65,7 +65,7 @@ function areaInPercent(rowAreaValue) {
                                             {{ rowIndex + 1 }}
                                         </th>
                                         <!-- <td>{{ row.value }}</td> -->
-                                        <td>{{ row.gumus_amount }}</td>
+                                        <td>{{ row[labelType] }}</td>
                                         <td>{{ row.area }}</td>
                                         <td>
                                             {{ areaInPercent(row.area) }}

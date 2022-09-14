@@ -9,6 +9,7 @@ export default {
 <script setup>
 import { computed, onMounted, reactive, ref, watch, watchEffect } from "vue";
 import { useMainStore } from "@/stores/main";
+import { Inertia } from "@inertiajs/inertia";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import BaseBlock from "@/Components/BaseBlock.vue";
 import L from "leaflet";
@@ -16,20 +17,36 @@ import "leaflet/dist/leaflet.css";
 import SoilLayersControl from "@/Components/Maps/SoilLayersControl.vue";
 import SoilDataTableControl from "../Components/Maps/SoilDataTableControl.vue";
 import SoilDataChartControl from "@/Components/Maps/SoilDataChartControl.vue";
+import RasterLayersControl from "@/Components/Maps/RasterLayersControl.vue";
 
-defineProps({
+const props = defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
     // laravelVersion: String,
     // phpVersion: String,
     gumusData: {
-        type: Object,
-        default: () => ({}),
+        type: Array,
+        default: () => [],
+    },
+    soilAppraisal: {
+        type: Array,
+        default: () => [],
+    },
+    salinityData: {
+        type: Array,
+        default: () => [],
+    },
+    groundwaterMineralizationData: {
+        type: Array,
+        default: () => [],
     },
 });
 
 // Main store
 const store = useMainStore();
+const wmsUrl = ref(
+    "http://188.127.224.130/cgi-bin/mapserv?map=/home/mapserver_data/agropointers.map&raster_name="
+);
 const zoom = ref(12.5);
 const center = ref([40.677694, 68.049889]);
 const map = ref(null);
@@ -57,6 +74,8 @@ const tileProviders = reactive({
         }
     ),
 });
+const selectedRasterLayer = ref("");
+const selectedRasterData = ref([]);
 const selectedLayers = ref([
     "aholi",
     "chegaralar",
@@ -86,7 +105,7 @@ const chegaralarLayer = computed(() =>
                 fillOpacity: 1,
             };
         },
-    })
+    }).bindPopup("Paxtazor district")
 );
 const aholiLayer = computed(() =>
     L.geoJSON(aholi.value, {
@@ -137,37 +156,13 @@ const kollektorlarLayer = computed(() =>
 );
 const kuzatuvQuduqlariLayer = computed(() =>
     L.geoJSON(kuzatuvQuduqlari.value, {
-        // pointToLayer: function (feature, latlng) {
-        //     L.circleMarker(latlng, {
-        //         radius: 5,
-        //         color: "#111",
-        //         fillColor: "orange",
-        //         weight: 1,
-        //         opacity: 1,
-        //         fillOpacity: 1,
-        //     })
-        //         // .bindTooltip(() => {
-        //         //     return `
-        //         //     <div>quduq raqami: ${featureData.properties?.quduq_raqa}</div>
-        //         //     <div>mgv_07_21: ${featureData.properties?.mgv_07_21}</div>
-        //         //     `;
-        //         // })
-        //         .addTo(map.value);
-        // },
         onEachFeature: function (feature, layer) {
-            // console.log(layer);
             layer.setIcon(
                 L.divIcon({
                     html: `<i class="fa fa-circle"></i>`,
                     className: "text-secondary",
                 })
             );
-            // .bindTooltip(() => {
-            //     return `
-            //     <div>quduq raqami: ${feature.properties?.quduq_raqa}</div>
-            //     <div>mgv_07_21: ${feature.properties?.mgv_07_21}</div>
-            //     `;
-            // });
         },
     })
 );
@@ -175,12 +170,18 @@ const sugorishTarmoqlariLayer = computed(() =>
     L.geoJSON(sugorishTarmoqlari.value)
 );
 
+// define raster layers
+const rasterLayer = ref({});
+
 onMounted(async () => {
     // fetch geojson data
     await fetchStaticLayers();
 
     // init map
     initMap();
+
+    // add rasters
+    // getGumusInterpolation();
 });
 
 watchEffect(() => {
@@ -213,6 +214,18 @@ watchEffect(() => {
     if (selectedLayers.value.includes("kuzatuvQuduqlari"))
         map.value?.addLayer(kuzatuvQuduqlariLayer.value);
 });
+
+watch(
+    () => selectedRasterLayer.value,
+    () => {
+        map.value.removeLayer(rasterLayer.value);
+        if (selectedRasterLayer.value == "gumus_amount")
+            getGumusInterpolation();
+        if (selectedRasterLayer.value == "ball_range")
+            getSoilAppraisalInterpolation();
+    },
+    { deep: true }
+);
 
 async function fetchStaticLayers() {
     const res_aholi = await fetch("/aholi.geojson");
@@ -291,14 +304,63 @@ function initMap() {
 
     map.value.attributionControl.setPrefix(""); // Don't show the 'Powered by Leaflet' text.
 }
+
+function getGumusInterpolation() {
+    const rasterName = `/home/mapserver_data/data/clipped_gumus.tif`;
+    const wmsOptions = {
+        layers: `gumus_interpolation`,
+        format: "image/png",
+        transparent: true,
+        crs: L.CRS.EPSG4326,
+        // opacity: 0.7,
+    };
+
+    // console.log(`${wmsUrl.value}${rasterName}`);
+    rasterLayer.value = L.tileLayer.wms(
+        `${wmsUrl.value}${rasterName}`,
+        wmsOptions
+    );
+
+    rasterLayer.value.addTo(map.value);
+    selectedRasterData.value = props.gumusData;
+}
+
+function getSoilAppraisalInterpolation() {
+    const rasterName = `/home/mapserver_data/data/soil_appraisal.tif`;
+    const wmsOptions = {
+        layers: `soil_appraisal_interpolation`,
+        format: "image/png",
+        transparent: true,
+        crs: L.CRS.EPSG4326,
+        // opacity: 0.7,
+    };
+
+    // console.log(`${wmsUrl.value}${rasterName}`);
+    rasterLayer.value = L.tileLayer.wms(
+        `${wmsUrl.value}${rasterName}`,
+        wmsOptions
+    );
+
+    rasterLayer.value.addTo(map.value);
+    selectedRasterData.value = props.soilAppraisal;
+}
 </script>
 
 <template>
     <div class="position-relative">
         <div id="map" style="height: 85vh"></div>
         <SoilLayersControl v-model:selected-layers="selectedLayers" />
-        <SoilDataTableControl :soil-data="gumusData" />
-        <SoilDataChartControl :soil-data="gumusData" />
+        <RasterLayersControl v-model="selectedRasterLayer" />
+        <template v-if="selectedRasterLayer">
+            <SoilDataTableControl
+                :data="selectedRasterData"
+                :label-type="selectedRasterLayer"
+            />
+            <SoilDataChartControl
+                :data="selectedRasterData"
+                :label-type="selectedRasterLayer"
+            />
+        </template>
         <p>Center is at {{ center }} and the zoom is: {{ zoom }}</p>
     </div>
 </template>

@@ -102,7 +102,7 @@ class SoilActivePotassiumPointerController extends Controller
             ]);
         }
 
-        Excel::import(SoilActivePotassiumPointerImport::class, $request->file('import_file'));
+        Excel::import(new SoilActivePotassiumPointerImport, $request->file('import_file'));
 
         SoilDataLog::create([
             'type' => 'SoilActivePotassiumPointer',

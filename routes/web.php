@@ -10,7 +10,10 @@ use App\Http\Controllers\SoilDataController;
 use App\Http\Controllers\SoilMineralStructurePointerController;
 use App\Http\Controllers\SoilMobilePhosphorusPointerController;
 use App\Http\Controllers\SoilSalinityPointerController;
+use App\Models\GroundwaterMineralizationPointer;
 use App\Models\GumusPointer;
+use App\Models\SoilAppraisalPointer;
+use App\Models\SoilSalinityPointer;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,7 +38,10 @@ Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'gumusData' => GumusPointer::latest('id')->take(3)->get()
+        'gumusData' => GumusPointer::latest('id')->take(3)->get(),
+        'soilAppraisal' => SoilAppraisalPointer::latest('id')->take(3)->get(),
+        'salinityData' => SoilSalinityPointer::latest('id')->take(3)->get(),
+        'groundwaterMineralizationData' => GroundwaterMineralizationPointer::latest('id')->take(3)->get()
         // 'laravelVersion' => Application::VERSION,
         // 'phpVersion' => PHP_VERSION,
     ]);
@@ -89,7 +95,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], functi
     // groundwater_mineralization
     Route::post('groundwater_mineralization_pointers/import', [GroundwaterMineralizationPointerController::class, 'import'])
         ->name('groundwater_mineralization_pointers_import');
-    Route::resource('groundwater_mineralization_pointers', GroundwaterMineralizationPointerController::class);
+    Route::resource('qw_mineralization_pointers', GroundwaterMineralizationPointerController::class);
 });
 
 

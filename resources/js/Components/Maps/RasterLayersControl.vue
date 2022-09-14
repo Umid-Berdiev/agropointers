@@ -1,0 +1,151 @@
+<script setup>
+import { indexOf } from "lodash";
+import { computed, ref, watch } from "vue";
+
+const props = defineProps({
+    modelValue: "",
+});
+const emits = defineEmits(["update:modelValue"]);
+
+const selectedLayer = ref("");
+
+watch(
+    () => selectedLayer.value,
+    (newVal) => {
+        console.log({ newVal });
+        emits("update:modelValue", newVal);
+    }
+);
+
+function onSelect(event) {
+    const value = event.target.value;
+    emits("update:modelValue", value);
+}
+</script>
+
+<template>
+    <div id="soil_layers_control" class="bg-white p-3 rounded-1 text-secondary">
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="radio"
+                id="gumusSwitch"
+                v-model="selectedLayer"
+                value="gumus_amount"
+            />
+            <label class="form-check-label w-100" for="gumusSwitch">
+                <div class="d-flex">
+                    <span>Gumuslilik</span>
+                </div>
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="radio"
+                id="ssmSwitch"
+                v-model="selectedLayer"
+                value="ssm"
+            />
+            <label class="form-check-label w-100" for="ssmSwitch">
+                <div class="d-flex">
+                    <span>Groundwater mineralization</span>
+                </div>
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="radio"
+                id="sssSwitch"
+                v-model="selectedLayer"
+                value="sss"
+            />
+            <label class="form-check-label w-100" for="sssSwitch">
+                <div class="d-flex">
+                    <span>Groundwater level</span>
+                </div>
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="radio"
+                id="soilAppraisalSwitch"
+                v-model="selectedLayer"
+                value="ball_range"
+            />
+            <label class="form-check-label w-100" for="soilAppraisalSwitch">
+                <div class="d-flex">
+                    <span>Soil appraisal</span>
+                </div>
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="radio"
+                id="smsSwitch"
+                v-model="selectedLayer"
+                value="sms"
+            />
+            <label class="form-check-label w-100" for="smsSwitch">
+                <div class="d-flex">
+                    <span>Soil mechanic structure</span>
+                </div>
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="radio"
+                id="soilSalinitySwitch"
+                v-model="selectedLayer"
+                value="soilSalinity"
+            />
+            <label class="form-check-label w-100" for="soilSalinitySwitch">
+                <div class="d-flex">
+                    <span>Soil salinity</span>
+                </div>
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="radio"
+                id="mobilePhosphorusSwitch"
+                v-model="selectedLayer"
+                value="mobilePhosphorus"
+            />
+            <label class="form-check-label w-100" for="mobilePhosphorusSwitch">
+                <div class="d-flex">
+                    <span>Mobile phosphorus</span>
+                </div>
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="radio"
+                id="activePotassiumSwitch"
+                v-model="selectedLayer"
+                value="activePotassium"
+            />
+            <label class="form-check-label w-100" for="activePotassiumSwitch">
+                <div class="d-flex">
+                    <span>Active potassium</span>
+                </div>
+            </label>
+        </div>
+    </div>
+</template>
+
+<style lang="scss" scoped>
+#soil_layers_control {
+    border: 2px solid lightgray;
+    position: absolute;
+    top: 19.5rem;
+    left: 0.6rem;
+    z-index: 800;
+}
+</style>

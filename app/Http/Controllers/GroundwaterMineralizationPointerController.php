@@ -102,7 +102,7 @@ class GroundwaterMineralizationPointerController extends Controller
             ]);
         }
 
-        Excel::import(GroundwaterMineralizationPointerImport::class, $request->file('import_file'));
+        Excel::import(new GroundwaterMineralizationPointerImport, $request->file('import_file'));
 
         GroundwaterDataLog::create([
             'type' => 'GroundwaterMineralizationPointer',

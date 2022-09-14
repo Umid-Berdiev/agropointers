@@ -102,7 +102,7 @@ class GroundwaterLevelPointerController extends Controller
             ]);
         }
 
-        Excel::import(GroundwaterLevelPointerImport::class, $request->file('import_file'));
+        Excel::import(new GroundwaterLevelPointerImport, $request->file('import_file'));
 
         GroundwaterDataLog::create([
             'type' => 'GroundwaterLevelPointer',

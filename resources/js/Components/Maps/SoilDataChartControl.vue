@@ -1,13 +1,6 @@
 <script setup>
-import { reactive, ref } from "vue";
-import {
-    LineChart,
-    BarChart,
-    RadarChart,
-    PolarAreaChart,
-    PieChart,
-    DoughnutChart,
-} from "vue-chart-3";
+import { computed, onMounted, reactive, ref, watch } from "vue";
+import { PieChart } from "vue-chart-3";
 import { Chart, registerables } from "chart.js";
 
 Chart.register(...registerables);
@@ -25,17 +18,18 @@ Chart.defaults.plugins.tooltip.radius = 3;
 Chart.defaults.plugins.legend.labels.boxWidth = 15;
 
 const props = defineProps({
-    soilData: {
+    data: {
         type: Array,
         default: () => [],
     },
+    labelType: "",
 });
-
-const chartPolarPieDonutData = reactive({
-    labels: props.soilData.map((item) => item.gumus_amount),
+const pieChartRef = ref(null);
+const chartPolarPieDonutData = computed(() => ({
+    labels: props.data.map((item) => item[props.labelType]),
     datasets: [
         {
-            data: props.soilData.map((item) => item.area),
+            data: props.data.map((item) => item.area),
             backgroundColor: [
                 "rgba(171, 227, 125, 1)",
                 "rgba(250, 219, 125, 1)",
@@ -48,12 +42,25 @@ const chartPolarPieDonutData = reactive({
             ],
         },
     ],
-});
+}));
+
+// watch(
+//     () => props.data,
+//     (newVal) => {
+//         pieChartRef.value?.update();
+//     }
+//     // { deep: true, immediate: true }
+// );
+
+// onMounted(() => {
+//     pieChartRef.value.update();
+// });
 </script>
 
 <template>
     <div id="soil_data_chart_control" class="bg-white p-3 rounded-1">
         <PieChart
+            ref="pieChartRef"
             :chart-data="chartPolarPieDonutData"
             :width="300"
             :height="300"

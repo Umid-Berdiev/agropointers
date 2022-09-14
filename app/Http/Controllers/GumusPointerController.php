@@ -21,7 +21,7 @@ class GumusPointerController extends Controller
      */
     public function index()
     {
-        //
+        return GumusPointer::latest('id')->take(3)->get();
     }
 
     /**
@@ -103,7 +103,7 @@ class GumusPointerController extends Controller
             ]);
         }
 
-        Excel::import(GumusPointerImport::class, $request->file('import_file'));
+        Excel::import(new GumusPointerImport, $request->file('import_file'));
 
         SoilDataLog::create([
             'type' => 'GumusPointer',

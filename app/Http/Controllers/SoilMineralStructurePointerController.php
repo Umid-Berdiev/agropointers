@@ -102,7 +102,7 @@ class SoilMineralStructurePointerController extends Controller
             ]);
         }
 
-        Excel::import(SoilMineralStructurePointerImport::class, $request->file('import_file'));
+        Excel::import(new SoilMineralStructurePointerImport, $request->file('import_file'));
 
         SoilDataLog::create([
             'type' => 'SoilMineralStructurePointer',
