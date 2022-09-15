@@ -1,5 +1,6 @@
 <script setup>
 import { indexOf } from "lodash";
+import BaseBlock from "../BaseBlock.vue";
 
 const props = defineProps({
     selectedLayers: {
@@ -26,7 +27,12 @@ function onChange(event) {
 </script>
 
 <template>
-    <div id="soil_layers_control" class="bg-white p-3 rounded-1 text-secondary">
+    <BaseBlock
+        id="vector_layers_control"
+        class="pb-3"
+        title="Chart"
+        btn-option-toggle
+    >
         <div class="form-check">
             <input
                 class="form-check-input"
@@ -148,11 +154,11 @@ function onChange(event) {
                 </div>
             </label>
         </div>
-    </div>
+    </BaseBlock>
 </template>
 
 <style lang="scss" scoped>
-#soil_layers_control {
+#vector_layers_control {
     border: 2px solid lightgray;
     position: absolute;
     top: 5.25rem;

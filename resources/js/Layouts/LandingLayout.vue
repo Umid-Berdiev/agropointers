@@ -127,6 +127,20 @@ onMounted(() => {
         ></div>
         <!-- END Page Overlay -->
 
+        <!-- Side Overlay -->
+        <BaseSideOverlay v-if="store.layout.sideOverlay">
+            <template #header>
+                <slot name="side-overlay-header"></slot>
+            </template>
+
+            <template #content>
+                <slot name="side-overlay-content"></slot>
+            </template>
+
+            <slot name="side-overlay"></slot>
+        </BaseSideOverlay>
+        <!-- END Side Overlay -->
+
         <!-- Header -->
         <BaseHeader v-if="store.layout.header">
             <template #content-left>
@@ -143,7 +157,6 @@ onMounted(() => {
             </template>
 
             <template #content-right>
-                <!--  -->
                 <div></div>
             </template>
 

@@ -1,6 +1,7 @@
 <script setup>
 import { computed, reactive, ref } from "vue";
 import { Dataset, DatasetItem, DatasetInfo, DatasetPager } from "vue-dataset";
+import BaseBlock from "../BaseBlock.vue";
 
 const props = defineProps({
     data: {
@@ -9,16 +10,6 @@ const props = defineProps({
     },
     labelType: "",
 });
-const columns = reactive([
-    {
-        name: "Gumus amount (%)",
-        field: "gumus_amount",
-    },
-    {
-        name: "Area",
-        field: "area",
-    },
-]);
 
 const soilDataAreaTotal = computed(
     () =>
@@ -33,12 +24,12 @@ function areaInPercent(rowAreaValue) {
 </script>
 
 <template>
-    <div id="soil_data_control" class="bg-white p-3 rounded-1">
-        <!-- <div class="table-responsive">
-            <table class="table table-border">
-                <thead></thead>
-            </table>
-        </div> -->
+    <BaseBlock
+        id="table_control_block"
+        class="pb-3"
+        title="Table"
+        btn-option-close
+    >
         <Dataset v-slot="{ ds }" :ds-data="data">
             <div class="row">
                 <div class="col-md-12">
@@ -47,14 +38,12 @@ function areaInPercent(rowAreaValue) {
                             class="table table-sm table-bordered mb-0 text-secondary"
                         >
                             <thead>
-                                <tr>
+                                <tr class="text-center">
                                     <th scope="col">№</th>
-                                    <th
-                                        v-for="(th, index) in columns"
-                                        :key="th.field"
-                                    >
-                                        {{ th.name }}
+                                    <th>
+                                        {{ labelType.split("_").join(" ") }}
                                     </th>
+                                    <th>Area</th>
                                     <th>%</th>
                                 </tr>
                             </thead>
@@ -66,8 +55,10 @@ function areaInPercent(rowAreaValue) {
                                         </th>
                                         <!-- <td>{{ row.value }}</td> -->
                                         <td>{{ row[labelType] }}</td>
-                                        <td>{{ row.area }}</td>
-                                        <td>
+                                        <td class="text-end">
+                                            {{ row.area }}
+                                        </td>
+                                        <td class="text-end">
                                             {{ areaInPercent(row.area) }}
                                         </td>
                                     </tr>
@@ -78,21 +69,22 @@ function areaInPercent(rowAreaValue) {
                 </div>
             </div>
             <!-- <div
-                class="d-flex flex-md-row flex-column justify-content-between align-items-center"
-            >
-                <DatasetInfo class="py-3 fs-sm" />
-                <DatasetPager class="flex-wrap py-3 fs-sm" />
-            </div> -->
+                            class="d-flex flex-md-row flex-column justify-content-between align-items-center"
+                        >
+                            <DatasetInfo class="py-3 fs-sm" />
+                            <DatasetPager class="flex-wrap py-3 fs-sm" />
+                        </div> -->
         </Dataset>
-    </div>
+    </BaseBlock>
 </template>
 
 <style lang="scss" scoped>
-#soil_data_control {
+#table_control_block {
     border: 2px solid lightgray;
     position: absolute;
     top: 4.25rem;
     right: 0.6rem;
     z-index: 800;
+    width: 370px;
 }
 </style>

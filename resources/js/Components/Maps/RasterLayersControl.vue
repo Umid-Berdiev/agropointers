@@ -29,6 +29,20 @@ function onSelect(event) {
             <input
                 class="form-check-input"
                 type="radio"
+                id="clearSwitch"
+                v-model="selectedLayer"
+                value=""
+            />
+            <label class="form-check-label w-100" for="clearSwitch">
+                <div class="d-flex">
+                    <span>Clear</span>
+                </div>
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="radio"
                 id="gumusSwitch"
                 v-model="selectedLayer"
                 value="gumus_amount"
@@ -45,7 +59,7 @@ function onSelect(event) {
                 type="radio"
                 id="ssmSwitch"
                 v-model="selectedLayer"
-                value="ssm"
+                value="mineralization"
             />
             <label class="form-check-label w-100" for="ssmSwitch">
                 <div class="d-flex">
@@ -59,7 +73,7 @@ function onSelect(event) {
                 type="radio"
                 id="sssSwitch"
                 v-model="selectedLayer"
-                value="sss"
+                value="level"
             />
             <label class="form-check-label w-100" for="sssSwitch">
                 <div class="d-flex">
@@ -85,9 +99,23 @@ function onSelect(event) {
             <input
                 class="form-check-input"
                 type="radio"
+                id="activePotassiumSwitch"
+                v-model="selectedLayer"
+                value="potassium"
+            />
+            <label class="form-check-label w-100" for="activePotassiumSwitch">
+                <div class="d-flex">
+                    <span>Active potassium</span>
+                </div>
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="radio"
                 id="smsSwitch"
                 v-model="selectedLayer"
-                value="sms"
+                value="mineral_structure"
             />
             <label class="form-check-label w-100" for="smsSwitch">
                 <div class="d-flex">
@@ -99,23 +127,9 @@ function onSelect(event) {
             <input
                 class="form-check-input"
                 type="radio"
-                id="soilSalinitySwitch"
-                v-model="selectedLayer"
-                value="soilSalinity"
-            />
-            <label class="form-check-label w-100" for="soilSalinitySwitch">
-                <div class="d-flex">
-                    <span>Soil salinity</span>
-                </div>
-            </label>
-        </div>
-        <div class="form-check">
-            <input
-                class="form-check-input"
-                type="radio"
                 id="mobilePhosphorusSwitch"
                 v-model="selectedLayer"
-                value="mobilePhosphorus"
+                value="mobile_phosphorus"
             />
             <label class="form-check-label w-100" for="mobilePhosphorusSwitch">
                 <div class="d-flex">
@@ -127,13 +141,13 @@ function onSelect(event) {
             <input
                 class="form-check-input"
                 type="radio"
-                id="activePotassiumSwitch"
+                id="soilSalinitySwitch"
                 v-model="selectedLayer"
-                value="activePotassium"
+                value="degree"
             />
-            <label class="form-check-label w-100" for="activePotassiumSwitch">
+            <label class="form-check-label w-100" for="soilSalinitySwitch">
                 <div class="d-flex">
-                    <span>Active potassium</span>
+                    <span>Soil salinity</span>
                 </div>
             </label>
         </div>

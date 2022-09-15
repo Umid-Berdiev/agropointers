@@ -10,9 +10,13 @@ use App\Http\Controllers\SoilDataController;
 use App\Http\Controllers\SoilMineralStructurePointerController;
 use App\Http\Controllers\SoilMobilePhosphorusPointerController;
 use App\Http\Controllers\SoilSalinityPointerController;
+use App\Models\GroundwaterLevelPointer;
 use App\Models\GroundwaterMineralizationPointer;
 use App\Models\GumusPointer;
+use App\Models\SoilActivePotassiumPointer;
 use App\Models\SoilAppraisalPointer;
+use App\Models\SoilMineralStructurePointer;
+use App\Models\SoilMobilePhosphorusPointer;
 use App\Models\SoilSalinityPointer;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -38,10 +42,14 @@ Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'gumusData' => GumusPointer::latest('id')->take(3)->get(),
-        'soilAppraisal' => SoilAppraisalPointer::latest('id')->take(3)->get(),
-        'salinityData' => SoilSalinityPointer::latest('id')->take(3)->get(),
-        'groundwaterMineralizationData' => GroundwaterMineralizationPointer::latest('id')->take(3)->get()
+        'soilGumusData' => GumusPointer::latest('id')->take(3)->get(),
+        'groundwaterMineralizationData' => GroundwaterMineralizationPointer::latest('id')->take(3)->get(),
+        'groundwaterLevelData' => GroundwaterLevelPointer::latest('id')->take(2)->get(),
+        'soilAppraisalData' => SoilAppraisalPointer::latest('id')->take(3)->get(),
+        'soilActivePotassiumData' => SoilActivePotassiumPointer::latest('id')->take(3)->get(),
+        'soilMechanicStructureData' => SoilMineralStructurePointer::latest('id')->take(3)->get(),
+        'soilActivePhosphorusData' => SoilMobilePhosphorusPointer::latest('id')->take(3)->get(),
+        'soilSalinityData' => SoilSalinityPointer::latest('id')->take(3)->get(),
         // 'laravelVersion' => Application::VERSION,
         // 'phpVersion' => PHP_VERSION,
     ]);

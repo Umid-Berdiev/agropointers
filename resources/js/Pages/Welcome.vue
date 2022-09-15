@@ -8,6 +8,7 @@ export default {
 
 <script setup>
 import { computed, onMounted, reactive, ref, watch, watchEffect } from "vue";
+import nprogress from "nprogress";
 import { useMainStore } from "@/stores/main";
 import { Inertia } from "@inertiajs/inertia";
 import { Head, Link } from "@inertiajs/inertia-vue3";
@@ -24,19 +25,35 @@ const props = defineProps({
     canRegister: Boolean,
     // laravelVersion: String,
     // phpVersion: String,
-    gumusData: {
-        type: Array,
-        default: () => [],
-    },
-    soilAppraisal: {
-        type: Array,
-        default: () => [],
-    },
-    salinityData: {
+    soilGumusData: {
         type: Array,
         default: () => [],
     },
     groundwaterMineralizationData: {
+        type: Array,
+        default: () => [],
+    },
+    groundwaterLevelData: {
+        type: Array,
+        default: () => [],
+    },
+    soilAppraisalData: {
+        type: Array,
+        default: () => [],
+    },
+    soilActivePotassiumData: {
+        type: Array,
+        default: () => [],
+    },
+    soilMechanicStructureData: {
+        type: Array,
+        default: () => [],
+    },
+    soilActivePhosphorusData: {
+        type: Array,
+        default: () => [],
+    },
+    soilSalinityData: {
         type: Array,
         default: () => [],
     },
@@ -47,44 +64,29 @@ const store = useMainStore();
 const wmsUrl = ref(
     "http://188.127.224.130/cgi-bin/mapserv?map=/home/mapserver_data/agropointers.map&raster_name="
 );
+const wmsOptions = reactive({
+    layers: `three_level_interpolation`,
+    format: "image/png",
+    transparent: true,
+    crs: L.CRS.EPSG4326,
+});
 const zoom = ref(12.5);
 const center = ref([40.677694, 68.049889]);
 const map = ref(null);
 const tileProviders = reactive({
     ["Openstreet harita"]: L.tileLayer(
-        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        {
-            visible: true,
-            // attribution:
-            //     '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-        }
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     ),
     ["Google harita"]: L.tileLayer(
-        "http://www.google.com/maps/vt?ROADMAP=s@189&gl=uz&x={x}&y={y}&z={z}",
-        {
-            visible: false,
-            // attribution: "GoogleMaps",
-        }
+        "http://www.google.com/maps/vt?ROADMAP=s@189&gl=uz&x={x}&y={y}&z={z}"
     ),
     ["Google harita (sun'iy yo'ldosh)"]: L.tileLayer(
-        "http://www.google.com/maps/vt?lyrs=s,h@189&gl=uz&x={x}&y={y}&z={z}",
-        {
-            visible: false,
-            // attribution: "GoogleSatellite",
-        }
+        "http://www.google.com/maps/vt?lyrs=s,h@189&gl=uz&x={x}&y={y}&z={z}"
     ),
 });
 const selectedRasterLayer = ref("");
 const selectedRasterData = ref([]);
-const selectedLayers = ref([
-    "aholi",
-    "chegaralar",
-    "boshqaYerlar",
-    "yollar",
-    "sugorishTarmoqlari",
-    "kollektorlar",
-    "kuzatuvQuduqlari",
-]);
+const selectedLayers = ref([]);
 const aholi = ref(null);
 const boshqaYerlar = ref(null);
 const chegaralar = ref(null);
@@ -137,8 +139,8 @@ const yollarLayer = computed(() =>
             return {
                 stroke: true,
                 fill: false,
-                color: "gray",
-                fillColor: "gray",
+                color: "white",
+                fillColor: "white",
             };
         },
     })
@@ -179,9 +181,6 @@ onMounted(async () => {
 
     // init map
     initMap();
-
-    // add rasters
-    // getGumusInterpolation();
 });
 
 watchEffect(() => {
@@ -218,11 +217,25 @@ watchEffect(() => {
 watch(
     () => selectedRasterLayer.value,
     () => {
+        nprogress.start();
         map.value.removeLayer(rasterLayer.value);
         if (selectedRasterLayer.value == "gumus_amount")
             getGumusInterpolation();
+        if (selectedRasterLayer.value == "mineralization")
+            getGroundwaterMineralizationInterpolation();
+        if (selectedRasterLayer.value == "level")
+            getGroundwaterLevelInterpolation();
         if (selectedRasterLayer.value == "ball_range")
             getSoilAppraisalInterpolation();
+        if (selectedRasterLayer.value == "potassium")
+            getSoilActivePotassiumInterpolation();
+        if (selectedRasterLayer.value == "mineral_structure")
+            getSoilMechanicStructureInterpolation();
+        if (selectedRasterLayer.value == "mobile_phosphorus")
+            getSoilActivePhosphorusInterpolation();
+        if (selectedRasterLayer.value == "degree")
+            getSoilSalinityInterpolation();
+        nprogress.done();
     },
     { deep: true }
 );
@@ -248,15 +261,9 @@ async function fetchStaticLayers() {
 
 function initMap() {
     map.value = L.map("map", {
-        // zoomControl: true,
-        // zoomAnimation: false,
-        // fadeAnimation: true,
-        // markerZoomAnimation: true,
         zoom: zoom.value,
         center: center.value,
         zoomDelta: 0.5,
-        // zoomSnap: 0.5,
-        // layers: Object.values(tileProviders),
     })
         .on("zoomend", function (e) {
             zoom.value = map.value.getZoom();
@@ -285,55 +292,23 @@ function initMap() {
         .setPosition("bottomleft")
         .addTo(map.value);
 
-    /*Legend specific*/
-    // let soilLayersControl = L.control({ position: "topleft" });
-    // let soilDataControl = L.control({ position: "topright" });
-
-    // soilLayersControl.onAdd = function (map) {
-    //     let div = L.DomUtil.get("soil_layers_control");
-    //     return div;
-    // };
-
-    // soilDataControl.onAdd = function (map) {
-    //     let div = L.DomUtil.get("soil_data_control");
-    //     return div;
-    // };
-
-    // soilLayersControl.addTo(map.value);
-    // soilDataControl.addTo(map.value);
-
     map.value.attributionControl.setPrefix(""); // Don't show the 'Powered by Leaflet' text.
 }
 
 function getGumusInterpolation() {
-    const rasterName = `/home/mapserver_data/data/clipped_gumus.tif`;
-    const wmsOptions = {
-        layers: `gumus_interpolation`,
-        format: "image/png",
-        transparent: true,
-        crs: L.CRS.EPSG4326,
-        // opacity: 0.7,
-    };
+    const rasterName = `/home/mapserver_data/data/gumus.tif`;
 
-    // console.log(`${wmsUrl.value}${rasterName}`);
     rasterLayer.value = L.tileLayer.wms(
         `${wmsUrl.value}${rasterName}`,
         wmsOptions
     );
 
     rasterLayer.value.addTo(map.value);
-    selectedRasterData.value = props.gumusData;
+    selectedRasterData.value = props.soilGumusData;
 }
 
 function getSoilAppraisalInterpolation() {
     const rasterName = `/home/mapserver_data/data/soil_appraisal.tif`;
-    const wmsOptions = {
-        layers: `soil_appraisal_interpolation`,
-        format: "image/png",
-        transparent: true,
-        crs: L.CRS.EPSG4326,
-        // opacity: 0.7,
-    };
 
     // console.log(`${wmsUrl.value}${rasterName}`);
     rasterLayer.value = L.tileLayer.wms(
@@ -342,7 +317,91 @@ function getSoilAppraisalInterpolation() {
     );
 
     rasterLayer.value.addTo(map.value);
-    selectedRasterData.value = props.soilAppraisal;
+    selectedRasterData.value = props.soilAppraisalData;
+}
+
+function getGroundwaterLevelInterpolation() {
+    const rasterName = `/home/mapserver_data/data/SSS.tif`;
+    const wmsOptions = {
+        layers: `two_level_interpolation`,
+        format: "image/png",
+        transparent: true,
+        crs: L.CRS.EPSG4326,
+        // opacity: 0.7,
+    };
+
+    rasterLayer.value = L.tileLayer.wms(
+        `${wmsUrl.value}${rasterName}`,
+        wmsOptions
+    );
+
+    rasterLayer.value.addTo(map.value);
+    selectedRasterData.value = props.groundwaterLevelData;
+}
+
+function getGroundwaterMineralizationInterpolation() {
+    const rasterName = `/home/mapserver_data/data/SSM.tif`;
+
+    // console.log(`${wmsUrl.value}${rasterName}`);
+    rasterLayer.value = L.tileLayer.wms(
+        `${wmsUrl.value}${rasterName}`,
+        wmsOptions
+    );
+
+    rasterLayer.value.addTo(map.value);
+    selectedRasterData.value = props.groundwaterMineralizationData;
+}
+
+function getSoilMechanicStructureInterpolation() {
+    const rasterName = `/home/mapserver_data/data/Tuproq_mexanik_tarkibi.tif`;
+
+    // console.log(`${wmsUrl.value}${rasterName}`);
+    rasterLayer.value = L.tileLayer.wms(
+        `${wmsUrl.value}${rasterName}`,
+        wmsOptions
+    );
+
+    rasterLayer.value.addTo(map.value);
+    selectedRasterData.value = props.soilMechanicStructureData;
+}
+
+function getSoilSalinityInterpolation() {
+    const rasterName = `/home/mapserver_data/data/tuproq_shurlanishi.tif`;
+
+    // console.log(`${wmsUrl.value}${rasterName}`);
+    rasterLayer.value = L.tileLayer.wms(
+        `${wmsUrl.value}${rasterName}`,
+        wmsOptions
+    );
+
+    rasterLayer.value.addTo(map.value);
+    selectedRasterData.value = props.soilSalinityData;
+}
+
+function getSoilActivePhosphorusInterpolation() {
+    const rasterName = `/home/mapserver_data/data/xarakatchan_fosfor.tif`;
+
+    // console.log(`${wmsUrl.value}${rasterName}`);
+    rasterLayer.value = L.tileLayer.wms(
+        `${wmsUrl.value}${rasterName}`,
+        wmsOptions
+    );
+
+    rasterLayer.value.addTo(map.value);
+    selectedRasterData.value = props.soilActivePhosphorusData;
+}
+
+function getSoilActivePotassiumInterpolation() {
+    const rasterName = `/home/mapserver_data/data/xarakatchan_kaliy.tif`;
+
+    // console.log(`${wmsUrl.value}${rasterName}`);
+    rasterLayer.value = L.tileLayer.wms(
+        `${wmsUrl.value}${rasterName}`,
+        wmsOptions
+    );
+
+    rasterLayer.value.addTo(map.value);
+    selectedRasterData.value = props.soilActivePotassiumData;
 }
 </script>
 
@@ -351,7 +410,7 @@ function getSoilAppraisalInterpolation() {
         <div id="map" style="height: 85vh"></div>
         <SoilLayersControl v-model:selected-layers="selectedLayers" />
         <RasterLayersControl v-model="selectedRasterLayer" />
-        <template v-if="selectedRasterLayer">
+        <template v-if="selectedRasterData.length && selectedRasterLayer">
             <SoilDataTableControl
                 :data="selectedRasterData"
                 :label-type="selectedRasterLayer"

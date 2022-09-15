@@ -2,6 +2,7 @@
 import { computed, onMounted, reactive, ref, watch } from "vue";
 import { PieChart } from "vue-chart-3";
 import { Chart, registerables } from "chart.js";
+import BaseBlock from "../BaseBlock.vue";
 
 Chart.register(...registerables);
 
@@ -58,21 +59,26 @@ const chartPolarPieDonutData = computed(() => ({
 </script>
 
 <template>
-    <div id="soil_data_chart_control" class="bg-white p-3 rounded-1">
+    <BaseBlock
+        id="chart_control_block"
+        class="pb-3"
+        title="Chart"
+        btn-option-close
+    >
         <PieChart
             ref="pieChartRef"
             :chart-data="chartPolarPieDonutData"
-            :width="300"
-            :height="300"
+            :width="325"
+            :height="325"
         />
-    </div>
+    </BaseBlock>
 </template>
 
 <style lang="scss" scoped>
-#soil_data_chart_control {
+#chart_control_block {
     border: 2px solid lightgray;
     position: absolute;
-    top: 14.75rem;
+    top: 18.25rem;
     right: 0.6rem;
     z-index: 800;
 }
