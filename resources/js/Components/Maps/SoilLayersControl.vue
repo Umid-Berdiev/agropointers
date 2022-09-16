@@ -30,8 +30,8 @@ function onChange(event) {
     <BaseBlock
         id="vector_layers_control"
         class="pb-3"
-        title="Chart"
-        btn-option-toggle
+        title="Vector layers"
+        btn-option-content
     >
         <div class="form-check">
             <input
@@ -92,24 +92,6 @@ function onChange(event) {
             <input
                 class="form-check-input"
                 type="checkbox"
-                id="yollarSwitch"
-                :checked="selectedLayers.includes('yollar')"
-                value="yollar"
-                @change="onChange"
-            />
-            <label class="form-check-label w-100" for="yollarSwitch">
-                <div class="d-flex">
-                    <span>Yo'llar</span>
-                    <div
-                        class="border border-secondary ms-auto my-auto horizontal-line"
-                    ></div>
-                </div>
-            </label>
-        </div>
-        <div class="form-check">
-            <input
-                class="form-check-input"
-                type="checkbox"
                 id="boshqaYerlarSwitch"
                 :checked="selectedLayers.includes('boshqaYerlar')"
                 value="boshqaYerlar"
@@ -150,7 +132,25 @@ function onChange(event) {
             <label class="form-check-label w-100" for="chegaralarSwitch">
                 <div class="d-flex">
                     <span>Chegaralar</span>
-                    <div class="ms-auto my-auto rectangle-lightgray"></div>
+                    <div class="ms-auto my-auto rectangle-chegaralar"></div>
+                </div>
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                id="yollarSwitch"
+                :checked="selectedLayers.includes('yollar')"
+                value="yollar"
+                @change="onChange"
+            />
+            <label class="form-check-label w-100" for="yollarSwitch">
+                <div class="d-flex">
+                    <span>Yo'llar</span>
+                    <div
+                        class="border border-secondary bg-white ms-auto my-auto horizontal-yollar"
+                    ></div>
                 </div>
             </label>
         </div>
@@ -164,12 +164,13 @@ function onChange(event) {
     top: 5.25rem;
     left: 0.6rem;
     z-index: 800;
+    // width: 370px;
 }
 
-.rectangle-lightgray {
+.rectangle-chegaralar {
     width: 1.5rem;
     height: 1rem;
-    background-color: lightgray;
+    background-color: purple;
 }
 
 .rectangle-aholi {
@@ -187,5 +188,10 @@ function onChange(event) {
 .horizontal-line {
     width: 2rem;
     height: 0.1rem;
+}
+
+.horizontal-yollar {
+    width: 2rem;
+    height: 0.25rem;
 }
 </style>

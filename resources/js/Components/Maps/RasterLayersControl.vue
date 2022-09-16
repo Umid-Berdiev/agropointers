@@ -1,6 +1,7 @@
 <script setup>
 import { indexOf } from "lodash";
 import { computed, ref, watch } from "vue";
+import BaseBlock from "../BaseBlock.vue";
 
 const props = defineProps({
     modelValue: "",
@@ -24,7 +25,12 @@ function onSelect(event) {
 </script>
 
 <template>
-    <div id="soil_layers_control" class="bg-white p-3 rounded-1 text-secondary">
+    <BaseBlock
+        id="raster_layers_control"
+        class="pb-3"
+        title="Raster layers"
+        btn-option-content
+    >
         <div class="form-check">
             <input
                 class="form-check-input"
@@ -151,14 +157,14 @@ function onSelect(event) {
                 </div>
             </label>
         </div>
-    </div>
+    </BaseBlock>
 </template>
 
 <style lang="scss" scoped>
-#soil_layers_control {
+#raster_layers_control {
     border: 2px solid lightgray;
     position: absolute;
-    top: 19.5rem;
+    top: 23rem;
     left: 0.6rem;
     z-index: 800;
 }

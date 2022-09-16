@@ -69,6 +69,7 @@ const wmsOptions = reactive({
     format: "image/png",
     transparent: true,
     crs: L.CRS.EPSG4326,
+    zIndex: 4,
 });
 const zoom = ref(12.5);
 const center = ref([40.677694, 68.049889]);
@@ -86,7 +87,7 @@ const tileProviders = reactive({
 });
 const selectedRasterLayer = ref("");
 const selectedRasterData = ref([]);
-const selectedLayers = ref([]);
+const selectedLayers = ref(["boshqaYerlar", "aholi", "chegaralar", "yollar"]);
 const aholi = ref(null);
 const boshqaYerlar = ref(null);
 const chegaralar = ref(null);
@@ -192,6 +193,9 @@ watchEffect(() => {
     map.value?.removeLayer(kollektorlarLayer.value);
     map.value?.removeLayer(kuzatuvQuduqlariLayer.value);
 
+    if (selectedLayers.value.includes("yollar"))
+        map.value?.addLayer(yollarLayer.value);
+
     if (selectedLayers.value.includes("aholi"))
         map.value?.addLayer(aholiLayer.value);
 
@@ -200,9 +204,6 @@ watchEffect(() => {
 
     if (selectedLayers.value.includes("boshqaYerlar"))
         map.value?.addLayer(boshqaYerlarLayer.value);
-
-    if (selectedLayers.value.includes("yollar"))
-        map.value?.addLayer(yollarLayer.value);
 
     if (selectedLayers.value.includes("sugorishTarmoqlari"))
         map.value?.addLayer(sugorishTarmoqlariLayer.value);
@@ -263,7 +264,7 @@ function initMap() {
     map.value = L.map("map", {
         zoom: zoom.value,
         center: center.value,
-        zoomDelta: 0.5,
+        // zoomDelta: 0.5,
     })
         .on("zoomend", function (e) {
             zoom.value = map.value.getZoom();
@@ -327,7 +328,7 @@ function getGroundwaterLevelInterpolation() {
         format: "image/png",
         transparent: true,
         crs: L.CRS.EPSG4326,
-        // opacity: 0.7,
+        zIndex: 4,
     };
 
     rasterLayer.value = L.tileLayer.wms(
@@ -423,7 +424,3 @@ function getSoilActivePotassiumInterpolation() {
         <p>Center is at {{ center }} and the zoom is: {{ zoom }}</p>
     </div>
 </template>
-
-<style scoped lang="scss">
-//
-</style>

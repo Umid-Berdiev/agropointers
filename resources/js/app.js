@@ -1,5 +1,4 @@
 import "./bootstrap";
-import "../css/app.css";
 
 // Main Stylesheet
 import "./assets/scss/main.scss";
@@ -14,15 +13,10 @@ import "./assets/scss/oneui/themes/smooth.scss";
 
 import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/inertia-vue3";
-import { InertiaProgress } from "@inertiajs/progress";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
+import { InertiaProgress } from "@inertiajs/progress";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
 import { createPinia } from "pinia";
-
-// Template components
-// import BaseBlock from "./Components/BaseBlock.vue";
-// import BaseBackground from "./Components/BaseBackground.vue";
-// import BasePageHeading from "./Components/BasePageHeading.vue";
 
 // Template directives
 import clickRipple from "@/directives/clickRipple";
