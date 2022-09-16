@@ -43,17 +43,12 @@ createInertiaApp({
         );
     },
     setup({ el, app, props, plugin }) {
-        return (
-            createApp({ render: () => h(app, props) })
-                .use(plugin)
-                .use(ZiggyVue, Ziggy)
-                // .component("BaseBlock", BaseBlock)
-                // .component("BaseBackground", BaseBackground)
-                // .component("BasePageHeading", BasePageHeading)
-                .directive("click-ripple", clickRipple)
-                .use(createPinia())
-                .mount(el)
-        );
+        return createApp({ render: () => h(app, props) })
+            .use(plugin)
+            .use(ZiggyVue, Ziggy)
+            .directive("click-ripple", clickRipple)
+            .use(createPinia())
+            .mount(el);
     },
 });
 

@@ -8,6 +8,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: "resources/js/app.js",
+            buildDirectory: "public/build", // Customize the build directory...
             refresh: true,
         }),
         vue({
