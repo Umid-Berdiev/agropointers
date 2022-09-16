@@ -22,11 +22,7 @@
 
     <!-- Scripts -->
     @routes
-    {{-- @vite('resources/js/app.js') --}}
-    {{
-    Vite::useBuildDirectory('public/build') // Customize the build directory...
-    ->withEntryPoints(['resources/js/app.js']) // Specify the entry points...
-    }}
+    @vite('resources/js/app.js')
     @inertiaHead
 </head>
 
