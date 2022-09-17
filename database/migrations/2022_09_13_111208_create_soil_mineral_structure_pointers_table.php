@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('location_id');
             $table->enum('value', [1, 2, 3]);
-            $table->string('mineral_structure')->nullable();
+            $table->string('mechanical_structure')->nullable();
             $table->unsignedDecimal('area')->nullable();
             $table->date('formed_at')->nullable();
             $table->timestamps();
