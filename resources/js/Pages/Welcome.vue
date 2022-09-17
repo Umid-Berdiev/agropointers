@@ -15,10 +15,10 @@ import { Head, Link } from "@inertiajs/inertia-vue3";
 import BaseBlock from "@/Components/BaseBlock.vue";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import SoilLayersControl from "@/Components/Maps/SoilLayersControl.vue";
+import RasterLayersControl from "@/Components/Maps/RasterLayersControl.vue";
 import SoilDataTableControl from "../Components/Maps/SoilDataTableControl.vue";
 import SoilDataChartControl from "@/Components/Maps/SoilDataChartControl.vue";
-import RasterLayersControl from "@/Components/Maps/RasterLayersControl.vue";
+import VectorLayersControl from "@/Components/Maps/VectorLayersControl.vue";
 
 const props = defineProps({
     canLogin: Boolean,
@@ -87,7 +87,15 @@ const tileProviders = reactive({
 });
 const selectedRasterLayer = ref("");
 const selectedRasterData = ref([]);
-const selectedLayers = ref(["boshqaYerlar", "aholi", "chegaralar", "yollar"]);
+const selectedLayers = ref([
+    "kuzatuvQuduqlari",
+    "kollektorlar",
+    "sugorishTarmoqlari",
+    "boshqaYerlar",
+    "aholi",
+    "chegaralar",
+    "yollar",
+]);
 const aholi = ref(null);
 const boshqaYerlar = ref(null);
 const chegaralar = ref(null);
@@ -220,7 +228,7 @@ watch(
     () => {
         nprogress.start();
         map.value.removeLayer(rasterLayer.value);
-        if (selectedRasterLayer.value == "gumus_amount")
+        if (selectedRasterLayer.value == "humus_amount")
             getGumusInterpolation();
         if (selectedRasterLayer.value == "mineralization")
             getGroundwaterMineralizationInterpolation();
@@ -409,7 +417,7 @@ function getSoilActivePotassiumInterpolation() {
 <template>
     <div class="position-relative">
         <div id="map" style="height: 85vh"></div>
-        <SoilLayersControl v-model:selected-layers="selectedLayers" />
+        <VectorLayersControl v-model:selected-layers="selectedLayers" />
         <RasterLayersControl v-model="selectedRasterLayer" />
         <template v-if="selectedRasterData.length && selectedRasterLayer">
             <SoilDataTableControl

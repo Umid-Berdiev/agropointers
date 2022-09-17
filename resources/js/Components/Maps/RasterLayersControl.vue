@@ -49,13 +49,55 @@ function onSelect(event) {
             <input
                 class="form-check-input"
                 type="radio"
+                id="soilAppraisalSwitch"
+                v-model="selectedLayer"
+                value="ball_range"
+            />
+            <label class="form-check-label w-100" for="soilAppraisalSwitch">
+                <div class="d-flex">
+                    <span>Soil bonitation</span>
+                </div>
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="radio"
+                id="soilSalinitySwitch"
+                v-model="selectedLayer"
+                value="degree"
+            />
+            <label class="form-check-label w-100" for="soilSalinitySwitch">
+                <div class="d-flex">
+                    <span>Soil salinity</span>
+                </div>
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="radio"
+                id="smsSwitch"
+                v-model="selectedLayer"
+                value="mineral_structure"
+            />
+            <label class="form-check-label w-100" for="smsSwitch">
+                <div class="d-flex">
+                    <span>Soil mechanical structure</span>
+                </div>
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="radio"
                 id="gumusSwitch"
                 v-model="selectedLayer"
-                value="gumus_amount"
+                value="humus_amount"
             />
             <label class="form-check-label w-100" for="gumusSwitch">
                 <div class="d-flex">
-                    <span>Gumuslilik</span>
+                    <span>Humus</span>
                 </div>
             </label>
         </div>
@@ -87,20 +129,7 @@ function onSelect(event) {
                 </div>
             </label>
         </div>
-        <div class="form-check">
-            <input
-                class="form-check-input"
-                type="radio"
-                id="soilAppraisalSwitch"
-                v-model="selectedLayer"
-                value="ball_range"
-            />
-            <label class="form-check-label w-100" for="soilAppraisalSwitch">
-                <div class="d-flex">
-                    <span>Soil appraisal</span>
-                </div>
-            </label>
-        </div>
+
         <div class="form-check">
             <input
                 class="form-check-input"
@@ -119,20 +148,6 @@ function onSelect(event) {
             <input
                 class="form-check-input"
                 type="radio"
-                id="smsSwitch"
-                v-model="selectedLayer"
-                value="mineral_structure"
-            />
-            <label class="form-check-label w-100" for="smsSwitch">
-                <div class="d-flex">
-                    <span>Soil mechanic structure</span>
-                </div>
-            </label>
-        </div>
-        <div class="form-check">
-            <input
-                class="form-check-input"
-                type="radio"
                 id="mobilePhosphorusSwitch"
                 v-model="selectedLayer"
                 value="mobile_phosphorus"
@@ -140,20 +155,6 @@ function onSelect(event) {
             <label class="form-check-label w-100" for="mobilePhosphorusSwitch">
                 <div class="d-flex">
                     <span>Mobile phosphorus</span>
-                </div>
-            </label>
-        </div>
-        <div class="form-check">
-            <input
-                class="form-check-input"
-                type="radio"
-                id="soilSalinitySwitch"
-                v-model="selectedLayer"
-                value="degree"
-            />
-            <label class="form-check-label w-100" for="soilSalinitySwitch">
-                <div class="d-flex">
-                    <span>Soil salinity</span>
                 </div>
             </label>
         </div>

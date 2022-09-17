@@ -12,7 +12,7 @@ class GumusPointer extends Model
     protected $fillable = [
         'location_id',
         'value',
-        'gumus_amount',
+        'humus_amount',
         'area'
     ];
 }

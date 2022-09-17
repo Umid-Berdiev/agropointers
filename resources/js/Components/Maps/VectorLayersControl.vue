@@ -44,7 +44,7 @@ function onChange(event) {
             />
             <label class="form-check-label w-100" for="kuzatuvQuduqlariSwitch">
                 <div class="d-flex">
-                    <span>Kuzatuv quduqlari</span>
+                    <span>Observation wells</span>
                     <i class="fa fa-circle text-secondary ms-auto my-auto"></i>
                 </div>
             </label>
@@ -60,7 +60,7 @@ function onChange(event) {
             />
             <label class="form-check-label w-100" for="kollektorlarSwitch">
                 <div class="d-flex">
-                    <span>Kollektorlar</span>
+                    <span>Collectors</span>
                     <div
                         class="border border-success ms-auto my-auto horizontal-line"
                     ></div>
@@ -81,7 +81,7 @@ function onChange(event) {
                 for="sugorishTarmoqlariSwitch"
             >
                 <div class="d-flex">
-                    <span class="me-3">Sug'orish tarmoqlari</span>
+                    <span class="me-3">Irrigation networks</span>
                     <div
                         class="border border-primary ms-auto my-auto horizontal-line"
                     ></div>
@@ -99,7 +99,7 @@ function onChange(event) {
             />
             <label class="form-check-label w-100" for="boshqaYerlarSwitch">
                 <div class="d-flex">
-                    <span>Boshqa yerlar</span>
+                    <span>Other fields</span>
                     <div class="ms-auto my-auto rectangle-boshqayerlar"></div>
                 </div>
             </label>
@@ -115,7 +115,7 @@ function onChange(event) {
             />
             <label class="form-check-label w-100" for="aholiSwitch">
                 <div class="d-flex">
-                    <span>Aholi</span>
+                    <span>Populated areas</span>
                     <div class="ms-auto my-auto rectangle-aholi"></div>
                 </div>
             </label>
@@ -131,7 +131,7 @@ function onChange(event) {
             />
             <label class="form-check-label w-100" for="chegaralarSwitch">
                 <div class="d-flex">
-                    <span>Chegaralar</span>
+                    <span>Borders</span>
                     <div class="ms-auto my-auto rectangle-chegaralar"></div>
                 </div>
             </label>
@@ -147,7 +147,7 @@ function onChange(event) {
             />
             <label class="form-check-label w-100" for="yollarSwitch">
                 <div class="d-flex">
-                    <span>Yo'llar</span>
+                    <span>Roads</span>
                     <div
                         class="border border-secondary bg-white ms-auto my-auto horizontal-yollar"
                     ></div>

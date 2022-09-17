@@ -30,7 +30,9 @@ const chartPolarPieDonutData = computed(() => ({
     labels: props.data.map((item) => item[props.labelType]),
     datasets: [
         {
-            data: props.data.map((item) => item.area),
+            data: props.data
+                .sort((a, b) => a.value - b.value)
+                .map((item) => item.area),
             backgroundColor: [
                 "rgba(171, 227, 125, 1)",
                 "rgba(250, 219, 125, 1)",
@@ -59,12 +61,7 @@ const chartPolarPieDonutData = computed(() => ({
 </script>
 
 <template>
-    <BaseBlock
-        id="chart_control_block"
-        class="pb-3"
-        title="Chart"
-        btn-option-close
-    >
+    <BaseBlock id="chart_control_block" class="pb-3" title="Chart">
         <PieChart
             ref="pieChartRef"
             :chart-data="chartPolarPieDonutData"

@@ -15,7 +15,7 @@ class GumusPointerImport implements ToCollection, WithStartRow
             GumusPointer::create([
                 'location_id' => 1,
                 'value' => $row[0],
-                'gumus_amount' => $row[1],
+                'humus_amount' => $row[1],
                 'area' => $row[2],
                 'formed_at' => date('d-m-Y')
             ]);

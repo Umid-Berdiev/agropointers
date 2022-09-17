@@ -18,25 +18,20 @@ const soilDataAreaTotal = computed(
 );
 
 function areaInPercent(rowAreaValue) {
-    console.log({ soilDataAreaTotal });
     return ((rowAreaValue / soilDataAreaTotal.value) * 100).toFixed(2);
 }
 </script>
 
 <template>
-    <BaseBlock
-        id="table_control_block"
-        class="pb-3"
-        title="Table"
-        btn-option-close
-    >
-        <Dataset v-slot="{ ds }" :ds-data="data">
+    <BaseBlock id="table_control_block" class="pb-3" title="Table">
+        <Dataset
+            v-slot="{ ds }"
+            :ds-data="data.sort((a, b) => a.value - b.value)"
+        >
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
-                        <table
-                            class="table table-sm table-bordered mb-0 text-secondary"
-                        >
+                        <table class="table table-sm table-bordered mb-0">
                             <thead>
                                 <tr class="text-center">
                                     <th scope="col">№</th>
