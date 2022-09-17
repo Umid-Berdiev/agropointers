@@ -12,7 +12,7 @@ class SoilMineralStructurePointer extends Model
     protected $fillable = [
         'location_id',
         'value',
-        'mineral_structure',
+        'mechanical_structure',
         'area'
     ];
 }

@@ -238,7 +238,7 @@ watch(
             getSoilAppraisalInterpolation();
         if (selectedRasterLayer.value == "potassium")
             getSoilActivePotassiumInterpolation();
-        if (selectedRasterLayer.value == "mineral_structure")
+        if (selectedRasterLayer.value == "mechanical_structure")
             getSoilMechanicStructureInterpolation();
         if (selectedRasterLayer.value == "mobile_phosphorus")
             getSoilActivePhosphorusInterpolation();

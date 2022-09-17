@@ -15,7 +15,7 @@ class SoilMineralStructurePointerImport implements ToCollection, WithStartRow
             SoilMineralStructurePointer::create([
                 'location_id' => 1,
                 'value' => $row[0],
-                'mineral_structure' => $row[1],
+                'mechanical_structure' => $row[1],
                 'area' => $row[2],
                 'formed_at' => date('d-m-Y')
             ]);

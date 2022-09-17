@@ -79,7 +79,7 @@ function onSelect(event) {
                 type="radio"
                 id="smsSwitch"
                 v-model="selectedLayer"
-                value="mineral_structure"
+                value="mechanical_structure"
             />
             <label class="form-check-label w-100" for="smsSwitch">
                 <div class="d-flex">
