@@ -18,7 +18,6 @@ use App\Models\SoilAppraisalPointer;
 use App\Models\SoilMineralStructurePointer;
 use App\Models\SoilMobilePhosphorusPointer;
 use App\Models\SoilSalinityPointer;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
