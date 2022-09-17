@@ -10,7 +10,7 @@ class GroundwaterDataController extends Controller
 {
     public function index(Request $request)
     {
-        $logs = GroundwaterDataLog::latest('id')->paginate(5);
+        $logs = GroundwaterDataLog::latest('id')->paginate(10);
 
         return Inertia::render('Admin/GroundwaterData', [
             'logs' => $logs
