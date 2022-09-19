@@ -4,6 +4,8 @@ use App\Http\Controllers\GroundwaterDataController;
 use App\Http\Controllers\GroundwaterLevelPointerController;
 use App\Http\Controllers\GroundwaterMineralizationPointerController;
 use App\Http\Controllers\GumusPointerController;
+use App\Http\Controllers\PopulatedAreaController;
+use App\Http\Controllers\StaticDataController;
 use App\Http\Controllers\SoilActivePotassiumPointerController;
 use App\Http\Controllers\SoilAppraisalPointerController;
 use App\Http\Controllers\SoilDataController;
@@ -103,6 +105,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], functi
     Route::post('groundwater_mineralization_pointers/import', [GroundwaterMineralizationPointerController::class, 'import'])
         ->name('groundwater_mineralization_pointers_import');
     Route::resource('qw_mineralization_pointers', GroundwaterMineralizationPointerController::class);
+
+    // dealing with shapefiles
+    Route::get('static-data', [StaticDataController::class, 'index'])->name('static-data.index');
+    Route::post('populated-areas/import/shapefile', [PopulatedAreaController::class, 'importShapefile'])->name('populated-areas.import.shapefile');
+    Route::resource('populated-areas', PopulatedAreaController::class);
 });
 
 

@@ -7,7 +7,7 @@ import "notyf/notyf.min.css"; // for React, Vue and Svelte
 export const useNotyf = createSharedComposable(() => {
     //   const themeColors = useThemeColors()
     const notyf = new Notyf({
-        duration: 3000,
+        duration: 5000,
         position: {
             x: "right",
             y: "top",
@@ -86,6 +86,7 @@ export const useNotyf = createSharedComposable(() => {
                 },
             },
         ],
+        dismissible: true,
     });
 
     return {
