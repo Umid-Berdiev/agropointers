@@ -39,7 +39,6 @@ const props = defineProps({
     },
 });
 const notyf = useNotyf();
-
 const columns = reactive([
     {
         name: "Data type",
@@ -54,7 +53,6 @@ const columns = reactive([
         field: "created_at",
     },
 ]);
-
 const vueSelectState = reactive({
     options: [
         {
@@ -76,9 +74,8 @@ const vueSelectState = reactive({
     ],
     selectedOption: "groundwater_level_pointers_import",
 });
-
 const importForm = useForm({
-    import_file: null,
+    zip: null,
 });
 
 // Apply a few Bootstrap 5 optimizations
@@ -105,7 +102,7 @@ async function onModalSubmit() {
             modal?.hide();
         },
         onError: (errorObj) => {
-            notyf.error(errorObj.import_file);
+            notyf.error(errorObj.zip);
             // notyf.error("Error while uploading shape file!");
         },
     });
@@ -189,7 +186,7 @@ async function onModalSubmit() {
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="importStaticDataModalLabel">
-                            Import shapefile data
+                            Import zipped shapefile data
                         </h5>
                         <button
                             type="button"
@@ -221,15 +218,14 @@ async function onModalSubmit() {
                                 <div class="col-12 mb-4">
                                     <Input
                                         type="file"
-                                        accept=".shp"
+                                        accept="zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed"
                                         @input="
-                                            importForm.import_file =
+                                            importForm.zip =
                                                 $event.target.files[0]
                                         "
                                         :class="{
                                             'is-invalid':
-                                                importForm.errors?.import_file
-                                                    ?.length,
+                                                importForm.errors?.zip?.length,
                                         }"
                                     />
                                     <progress
@@ -242,7 +238,7 @@ async function onModalSubmit() {
                                     <div
                                         class="invalid-feedback animated fadeIn"
                                     >
-                                        {{ importForm.errors?.import_file }}
+                                        {{ importForm.errors?.zip }}
                                     </div>
                                 </div>
 

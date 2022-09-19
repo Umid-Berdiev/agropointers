@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\HumusDataExport;
 use App\Imports\GumusPointerImport;
 use App\Models\GumusPointer;
 use App\Models\SoilDataLog;
@@ -111,5 +112,12 @@ class GumusPointerController extends Controller
         ]);
 
         return Redirect::route('admin.soil_data');
+    }
+
+    public function export()
+    {
+        $dateStr = now()->format('d_m_Y');
+        // dd($dateStr);
+        return Excel::download(new HumusDataExport, "humus_data_$dateStr.xlsx");
     }
 }

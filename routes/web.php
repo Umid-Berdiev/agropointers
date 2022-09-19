@@ -56,6 +56,8 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('humus-data/export/', [GumusPointerController::class, 'export'])->name('humus_amount.export');
+
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', fn () => Inertia::render('Dashboard'))
         ->name('dashboard');

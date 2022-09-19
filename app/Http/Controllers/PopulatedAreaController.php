@@ -97,40 +97,56 @@ class PopulatedAreaController extends Controller
 
     public function importShapefile(Request $request)
     {
-        $file = $request->file('import_file');
+        $extracted_file_path = base_path("storage/app/uploads/unzip");
+
         try {
-            // dd($file);
-            // Open Shapefile
-            $Shapefile = new ShapefileReader(public_path('Aholi/Aholi.shp'));
-            dd($Shapefile);
-            // Read all the records
-            while ($Geometry = $Shapefile->fetchRecord()) {
-                // Skip the record if marked as "deleted"
-                if ($Geometry->isDeleted()) {
-                    continue;
+            $zipfile = $request->file("zip");
+            $zipfile_name = pathinfo($zipfile->getClientOriginalName(), PATHINFO_FILENAME);
+            $is_extracted = extractUploadedZip($zipfile);
+            $shape_file = "$extracted_file_path/$zipfile_name/$zipfile_name.shp";
+            // dd($shape_file);
+
+            if ($is_extracted) {
+                $Shapefile = new ShapefileReader($shape_file);
+                dd($Shapefile);
+                // Read all the records
+                while ($Geometry = $Shapefile->fetchRecord()) {
+                    // Skip the record if marked as "deleted"
+                    if ($Geometry->isDeleted()) {
+                        continue;
+                    }
+
+                    // Print Geometry as an Array
+                    print_r($Geometry->getArray());
+
+                    // Print Geometry as WKT
+                    print_r($Geometry->getWKT());
+
+                    // Print Geometry as GeoJSON
+                    print_r($Geometry->getGeoJSON());
+
+                    // Print DBF data
+                    print_r($Geometry->getDataArray());
+
+                    // PopulatedArea::create([
+                    //     'model' => 'PopulatedArea',
+                    //     'lat' => '',
+                    //     'long' => '',
+                    // ]);
                 }
-
-                // Print Geometry as an Array
-                print_r($Geometry->getArray());
-
-                // Print Geometry as WKT
-                print_r($Geometry->getWKT());
-
-                // Print Geometry as GeoJSON
-                print_r($Geometry->getGeoJSON());
-
-                // Print DBF data
-                print_r($Geometry->getDataArray());
             }
         } catch (ShapefileException $e) {
             // Print detailed error information
-            echo "Error Type: " . $e->getErrorType()
-                . "\nMessage: " . $e->getMessage()
-                . "\nDetails: " . $e->getDetails();
+            // echo "Error Type: " . $e->getErrorType()
+            //     . "\nMessage: " . $e->getMessage()
+            //     . "\nDetails: " . $e->getDetails();
 
             throw ValidationException::withMessages([
-                'import_file' => __($e->getMessage() . "\nDetails: " . $e->getDetails()),
+                'zip' => __($e->getMessage() . "\nDetails: " . $e->getDetails()),
             ]);
         }
+
+        // return back()
+        //     ->with('success', 'Data successfully imported!');
     }
 }

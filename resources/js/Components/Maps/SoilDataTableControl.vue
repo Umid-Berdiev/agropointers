@@ -1,7 +1,9 @@
 <script setup>
+import { useForm } from "@inertiajs/inertia-vue3";
 import { computed, reactive, ref } from "vue";
 import { Dataset, DatasetItem, DatasetInfo, DatasetPager } from "vue-dataset";
 import BaseBlock from "../BaseBlock.vue";
+import Button from "../Button.vue";
 
 const props = defineProps({
     data: {
@@ -17,13 +19,34 @@ const soilDataAreaTotal = computed(
         props.data.reduce((acc, cur) => acc + Number(cur.area), 0)
 );
 
+const exportForm = useForm();
+
 function areaInPercent(rowAreaValue) {
     return ((rowAreaValue / soilDataAreaTotal.value) * 100).toFixed(2);
+}
+
+function exportTableData() {
+    exportForm.get(route(`${props.labelType}.export`));
 }
 </script>
 
 <template>
     <BaseBlock id="table_control_block" class="pb-3" title="Table">
+        <div class="d-flex mb-3">
+            <!-- <form class="ms-auto" @submit.prevent="exportTableData">
+                <Button class="w-auto" type="submit">
+                    <i class="si si-cloud-download"></i>
+                    <span class="ms-2">Export</span>
+                </Button>
+            </form> -->
+            <a
+                :href="route(`${labelType}.export`)"
+                class="btn btn-sm btn-primary ms-auto"
+            >
+                <i class="si si-cloud-download"></i>
+                <span class="ms-2">Export</span>
+            </a>
+        </div>
         <Dataset
             v-slot="{ ds }"
             :ds-data="data.sort((a, b) => a.value - b.value)"
