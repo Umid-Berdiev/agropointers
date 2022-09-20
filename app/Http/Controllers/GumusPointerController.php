@@ -117,7 +117,6 @@ class GumusPointerController extends Controller
     public function export()
     {
         $dateStr = now()->format('d_m_Y');
-        // dd($dateStr);
         return Excel::download(new HumusDataExport, "humus_data_$dateStr.xlsx");
     }
 }

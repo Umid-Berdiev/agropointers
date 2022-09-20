@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SoilActivePotassiumExport;
 use App\Imports\SoilActivePotassiumPointerImport;
 use App\Models\SoilActivePotassiumPointer;
 use App\Models\SoilDataLog;
@@ -110,5 +111,11 @@ class SoilActivePotassiumPointerController extends Controller
         ]);
 
         return Redirect::route('admin.soil_data');
+    }
+
+    public function export()
+    {
+        $dateStr = now()->format('d_m_Y');
+        return Excel::download(new SoilActivePotassiumExport, "active_potassium_$dateStr.xlsx");
     }
 }

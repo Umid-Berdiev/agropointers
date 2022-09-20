@@ -27,12 +27,7 @@ function onChange(event) {
 </script>
 
 <template>
-    <BaseBlock
-        id="vector_layers_control"
-        class="pb-3"
-        title="Vector layers"
-        btn-option-content
-    >
+    <BaseBlock title="Vector layers" class="mb-3" btn-option-content>
         <div class="form-check">
             <input
                 class="form-check-input"
@@ -158,15 +153,6 @@ function onChange(event) {
 </template>
 
 <style lang="scss" scoped>
-#vector_layers_control {
-    border: 2px solid lightgray;
-    position: absolute;
-    top: 5.25rem;
-    left: 0.6rem;
-    z-index: 800;
-    // width: 370px;
-}
-
 .rectangle-chegaralar {
     width: 1.5rem;
     height: 1rem;

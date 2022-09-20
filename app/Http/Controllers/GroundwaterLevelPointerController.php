@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\GroundwaterLevelExport;
 use App\Imports\GroundwaterLevelPointerImport;
 use App\Models\GroundwaterDataLog;
 use App\Models\GroundwaterLevelPointer;
@@ -110,5 +111,11 @@ class GroundwaterLevelPointerController extends Controller
         ]);
 
         return Redirect::route('admin.groundwater_data');
+    }
+
+    public function export()
+    {
+        $dateStr = now()->format('d_m_Y');
+        return Excel::download(new GroundwaterLevelExport, "level_$dateStr.xlsx");
     }
 }

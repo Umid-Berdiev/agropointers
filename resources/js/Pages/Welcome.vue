@@ -412,14 +412,47 @@ function getSoilActivePotassiumInterpolation() {
     rasterLayer.value.addTo(map.value);
     selectedRasterData.value = props.soilActivePotassiumData;
 }
+
+function exportToImage() {
+    html2canvas(document.querySelector("#mapid"), {
+        useCORS: true,
+        logging: true,
+        allowTaint: true,
+    }).then(function (canvas) {
+        saveAs(canvas.toDataURL(), "map_img.png");
+    });
+
+    function saveAs(uri, filename) {
+        let link = document.createElement("a");
+
+        if (typeof link.download === "string") {
+            link.href = uri;
+            link.download = filename;
+
+            //Firefox requires the link to be in the body
+            document.body.appendChild(link);
+
+            //simulate click
+            link.click();
+
+            //remove the link when done
+            document.body.removeChild(link);
+        } else window.open(uri);
+    }
+}
 </script>
 
 <template>
-    <div class="position-relative">
+    <div id="map-container" class="position-relative">
         <div id="map" style="height: 85vh"></div>
-        <VectorLayersControl v-model:selected-layers="selectedLayers" />
-        <RasterLayersControl v-model="selectedRasterLayer" />
-        <template v-if="selectedRasterData.length && selectedRasterLayer">
+        <div id="left_control_block">
+            <VectorLayersControl v-model:selected-layers="selectedLayers" />
+            <RasterLayersControl v-model="selectedRasterLayer" />
+        </div>
+        <div
+            id="right_control_block"
+            v-if="selectedRasterData.length && selectedRasterLayer"
+        >
             <SoilDataTableControl
                 :data="selectedRasterData"
                 :label-type="selectedRasterLayer"
@@ -428,7 +461,25 @@ function getSoilActivePotassiumInterpolation() {
                 :data="selectedRasterData"
                 :label-type="selectedRasterLayer"
             />
-        </template>
+        </div>
         <p>Center is at {{ center }} and the zoom is: {{ zoom }}</p>
     </div>
 </template>
+
+<style lang="scss" scoped>
+#left_control_block {
+    // border: 2px solid lightgray;
+    position: absolute;
+    top: 5.25rem;
+    left: 1rem;
+    z-index: 800;
+}
+#right_control_block {
+    // border: 2px solid lightgray;
+    position: absolute;
+    top: 4.25rem;
+    right: 1rem;
+    z-index: 800;
+    width: 370px;
+}
+</style>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SoilMineralStructureExport;
 use App\Imports\SoilMineralStructurePointerImport;
 use App\Models\SoilDataLog;
 use App\Models\SoilMineralStructurePointer;
@@ -110,5 +111,11 @@ class SoilMineralStructurePointerController extends Controller
         ]);
 
         return Redirect::route('admin.soil_data');
+    }
+
+    public function export()
+    {
+        $dateStr = now()->format('d_m_Y');
+        return Excel::download(new SoilMineralStructureExport, "mechanical_structure_$dateStr.xlsx");
     }
 }

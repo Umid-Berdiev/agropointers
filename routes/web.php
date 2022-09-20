@@ -56,7 +56,14 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('soil-appraisal/export/', [SoilAppraisalPointerController::class, 'export'])->name('ball_range.export');
+Route::get('soil-salinity/export/', [SoilSalinityPointerController::class, 'export'])->name('degree.export');
+Route::get('soil-mechanical-structure/export/', [SoilMineralStructurePointerController::class, 'export'])->name('mechanical_structure.export');
 Route::get('humus-data/export/', [GumusPointerController::class, 'export'])->name('humus_amount.export');
+Route::get('soil-active-potassium/export/', [SoilActivePotassiumPointerController::class, 'export'])->name('potassium.export');
+Route::get('soil-mobile-phosphorus/export/', [SoilMobilePhosphorusPointerController::class, 'export'])->name('mobile_phosphorus.export');
+Route::get('groundwater-mineralization/export/', [GroundwaterMineralizationPointerController::class, 'export'])->name('mineralization.export');
+Route::get('groundwater-level/export/', [GroundwaterLevelPointerController::class, 'export'])->name('level.export');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', fn () => Inertia::render('Dashboard'))

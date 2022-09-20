@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\GroundwaterMineralizationExport;
 use App\Imports\GroundwaterMineralizationPointerImport;
 use App\Models\GroundwaterDataLog;
 use App\Models\GroundwaterMineralizationPointer;
@@ -110,5 +111,11 @@ class GroundwaterMineralizationPointerController extends Controller
         ]);
 
         return Redirect::route('admin.groundwater_data');
+    }
+
+    public function export()
+    {
+        $dateStr = now()->format('d_m_Y');
+        return Excel::download(new GroundwaterMineralizationExport, "mineralization_$dateStr.xlsx");
     }
 }

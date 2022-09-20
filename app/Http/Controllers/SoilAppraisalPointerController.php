@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SoilAppraisalExport;
 use App\Imports\SoilAppraisalPointerImport;
 use App\Models\SoilAppraisalPointer;
 use App\Models\SoilDataLog;
@@ -110,5 +111,11 @@ class SoilAppraisalPointerController extends Controller
         ]);
 
         return Redirect::route('admin.soil_data');
+    }
+
+    public function export()
+    {
+        $dateStr = now()->format('d_m_Y');
+        return Excel::download(new SoilAppraisalExport, "soil_appraisal_$dateStr.xlsx");
     }
 }
