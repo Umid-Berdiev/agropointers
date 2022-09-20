@@ -250,15 +250,20 @@ watch(
 );
 
 async function fetchStaticLayers() {
-    const res_aholi = await fetch("/aholi.geojson");
-    const res_boshqa_yerlar = await fetch("/boshqa_yerlar.geojson");
-    const res_chegaralar = await fetch("/chegaralar.geojson");
-    const res_kollektorlar = await fetch("/kollektorlar.geojson");
-    const res_kuzatuv_quduqlari = await fetch("/kuzatuv_quduqlari.geojson");
-    const res_sugorish_tarmoqlari = await fetch(
-        "/sug'orish_tarmoqlari.geojson"
+    const res_aholi = await fetch("/geojson_data/aholi.geojson");
+    const res_boshqa_yerlar = await fetch(
+        "/geojson_data/boshqa_yerlar.geojson"
     );
-    const res_yollar = await fetch("/yo'llar.geojson");
+    const res_chegaralar = await fetch("/geojson_data/chegaralar.geojson");
+    const res_kollektorlar = await fetch("/geojson_data/kollektorlar.geojson");
+    const res_kuzatuv_quduqlari = await fetch(
+        "/geojson_data/kuzatuv_quduqlari.geojson"
+    );
+    const res_yollar = await fetch("/geojson_data/yo'llar.geojson");
+    const res_sugorish_tarmoqlari = await fetch(
+        "/geojson_data/sug'orish_tarmoqlari.geojson"
+    );
+
     aholi.value = await res_aholi.json();
     boshqaYerlar.value = await res_boshqa_yerlar.json();
     chegaralar.value = await res_chegaralar.json();
@@ -411,34 +416,6 @@ function getSoilActivePotassiumInterpolation() {
 
     rasterLayer.value.addTo(map.value);
     selectedRasterData.value = props.soilActivePotassiumData;
-}
-
-function exportToImage() {
-    html2canvas(document.querySelector("#mapid"), {
-        useCORS: true,
-        logging: true,
-        allowTaint: true,
-    }).then(function (canvas) {
-        saveAs(canvas.toDataURL(), "map_img.png");
-    });
-
-    function saveAs(uri, filename) {
-        let link = document.createElement("a");
-
-        if (typeof link.download === "string") {
-            link.href = uri;
-            link.download = filename;
-
-            //Firefox requires the link to be in the body
-            document.body.appendChild(link);
-
-            //simulate click
-            link.click();
-
-            //remove the link when done
-            document.body.removeChild(link);
-        } else window.open(uri);
-    }
 }
 </script>
 
