@@ -25,7 +25,7 @@ watchEffect(() => {
 async function onChange() {
     try {
         isLoading.value = true;
-        const url = `http://89.236.195.198:3010/data/all`;
+        const url = `http://89.236.195.198:3010/data/bwn`;
         const token = await getDiverToken();
         axios.defaults.headers.Authorization = "Bearer " + token;
 
@@ -33,18 +33,21 @@ async function onChange() {
             url,
             method: "POST",
             data: {
-                divers: props.cadasterNumber,
-                date: toDate.value,
-                // from_date: fromDate.value,
-                // to_date: toDate.value,
+                cadastr_number: props.cadasterNumber,
+                from: fromDate.value,
+                to: toDate.value,
             },
         });
 
-        diverStationId.value = res.data[0]?.st_id || "";
-
-        isLoading.value = false;
+        if (res.data.message) {
+            notyf.error(res.data.message);
+        } else {
+            diverStationId.value = res.data[0]?.st_id || "";
+        }
     } catch (error) {
         notyf.error(error.message);
+    } finally {
+        isLoading.value = false;
     }
 }
 
@@ -85,7 +88,7 @@ async function getDiverToken() {
 </script>
 
 <template>
-    <div class="p-3">
+    <div>
         <table class="table table-sm table-hover table-bordered">
             <thead class="text-center">
                 <tr>

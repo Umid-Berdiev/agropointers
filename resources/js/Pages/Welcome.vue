@@ -183,7 +183,7 @@ const kuzatuvQuduqlariLayer = computed(() =>
                     L.divIcon({
                         html: `
                     <span class="fa fa-circle text-secondary rounded-circle ${hasDiver}"></span>
-                    <small>${authorNumber}</small>`,
+                    `,
                         className: ``,
                     })
                 )
@@ -484,12 +484,27 @@ function getSoilActivePotassiumInterpolation() {
 }
 
 #right_control_block {
-    // border: 2px solid lightgray;
-    position: absolute;
-    top: 4.25rem;
-    right: 1rem;
-    z-index: 800;
-    width: 370px;
+    margin: 1rem;
+}
+
+// $grid-breakpoints: (
+//   xs: 0,
+//   sm: 576px,
+//   md: 768px,
+//   lg: 992px,
+//   xl: 1200px,
+//   xxl: 1400px
+// );
+
+@media (min-width: 768px) {
+    #right_control_block {
+        margin: 0;
+        position: absolute;
+        top: 4.25rem;
+        right: 1rem;
+        z-index: 800;
+        width: 370px;
+    }
 }
 
 .pulsing {
