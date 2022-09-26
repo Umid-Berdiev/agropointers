@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-// Register autoloader
-// require_once(base_path() . '/vendor/php-shapefile/src/Shapefile/ShapefileAutoloader.php');
-
 use App\Http\Requests\StorePopulatedAreaRequest;
 use App\Http\Requests\UpdatePopulatedAreaRequest;
 use App\Models\PopulatedArea;

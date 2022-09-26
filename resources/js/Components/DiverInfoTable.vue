@@ -1,0 +1,110 @@
+<script setup>
+import { ref, watchEffect } from "vue";
+import { useStorage } from "@vueuse/core";
+import { useNotyf } from "../composable/useNotyf";
+import moment from "moment";
+import axios from "axios";
+
+const props = defineProps({
+    cadasterNumber: "",
+});
+
+const notyf = useNotyf();
+const diverInfo = ref([]);
+const isLoading = ref(false);
+const diverStationId = ref("");
+const fromDate = ref(moment().subtract(10, "days").format("DD-MM-YYYY"));
+const toDate = ref(moment().subtract(1, "day").format("DD-MM-YYYY"));
+
+watchEffect(() => {
+    if (props.cadasterNumber) {
+        onChange();
+    }
+});
+
+async function onChange() {
+    try {
+        isLoading.value = true;
+        const url = `http://89.236.195.198:3010/data/all`;
+        const token = await getDiverToken();
+        axios.defaults.headers.Authorization = "Bearer " + token;
+
+        const res = await axios({
+            url,
+            method: "POST",
+            data: {
+                divers: props.cadasterNumber,
+                date: toDate.value,
+                // from_date: fromDate.value,
+                // to_date: toDate.value,
+            },
+        });
+
+        diverStationId.value = res.data[0]?.st_id || "";
+
+        isLoading.value = false;
+    } catch (error) {
+        notyf.error(error.message);
+    }
+}
+
+async function getDiverToken() {
+    let diverToken = localStorage.getItem("diver_token");
+    let diverTokenExpired = moment(
+        new Date(localStorage.getItem("diver_token_expired_at")),
+        "DD/MM/YYYY HH:mm:ss"
+    );
+
+    const now = moment(new Date(), "DD/MM/YYYY HH:mm:ss");
+    // console.log(diverTokenExpired.diff(now, "days") <= 0);
+
+    if (
+        !diverToken ||
+        diverToken == "undefined" ||
+        !diverTokenExpired ||
+        diverTokenExpired.diff(now, "days") <= 0
+    ) {
+        try {
+            const res = await axios.post("http://89.236.195.198:3010/login", {
+                username: "mis",
+                password: "samar",
+            });
+            diverToken = res.data.token;
+            localStorage.setItem("diver_token", res.data.token);
+            localStorage.setItem(
+                "diver_token_expired_at",
+                res.data["expired at"]
+            );
+        } catch (error) {
+            alert("Diver token olishda xatolik: " + error);
+        }
+    }
+
+    return diverToken;
+}
+</script>
+
+<template>
+    <div class="p-3">
+        <table class="table table-sm table-hover table-bordered">
+            <thead class="text-center">
+                <tr>
+                    <th v-text="'Date'" />
+                    <th v-text="'Salinity'" />
+                    <th v-text="'Level'" />
+                    <th v-text="'Temperature'" />
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item, index) in diverInfo" :key="index">
+                    <td v-text="$h.formatDate(item.vaqt, 'DD-MM-YYYY')" />
+                    <td class="text-right" v-text="item.mineral" />
+                    <td class="text-right" v-text="item.level" />
+                    <td class="text-right" v-text="item.temperatura" />
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<style lang="scss" scoped></style>

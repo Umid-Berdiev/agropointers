@@ -72,7 +72,7 @@ const vueSelectState = reactive({
             value: "collectors_shape",
         },
     ],
-    selectedOption: "groundwater_level_pointers_import",
+    selectedOption: "populated-areas.import.shapefile",
 });
 const importForm = useForm({
     zip: null,

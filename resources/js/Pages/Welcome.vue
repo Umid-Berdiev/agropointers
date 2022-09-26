@@ -1,5 +1,6 @@
 <script>
 import LandingLayout from "@/Layouts/LandingLayout.vue";
+import { Modal } from "bootstrap";
 
 export default {
     layout: LandingLayout,
@@ -19,6 +20,7 @@ import RasterLayersControl from "@/Components/Maps/RasterLayersControl.vue";
 import SoilDataTableControl from "../Components/Maps/SoilDataTableControl.vue";
 import SoilDataChartControl from "@/Components/Maps/SoilDataChartControl.vue";
 import VectorLayersControl from "@/Components/Maps/VectorLayersControl.vue";
+import WellInfoModal from "@/Components/Modals/WellInfoModal.vue";
 
 const props = defineProps({
     canLogin: Boolean,
@@ -103,6 +105,7 @@ const kollektorlar = ref(null);
 const kuzatuvQuduqlari = ref(null);
 const sugorishTarmoqlari = ref(null);
 const yollar = ref(null);
+const clickedWell = reactive({});
 
 // layers
 const chegaralarLayer = computed(() =>
@@ -168,12 +171,28 @@ const kollektorlarLayer = computed(() =>
 const kuzatuvQuduqlariLayer = computed(() =>
     L.geoJSON(kuzatuvQuduqlari.value, {
         onEachFeature: function (feature, layer) {
-            layer.setIcon(
-                L.divIcon({
-                    html: `<i class="fa fa-circle"></i>`,
-                    className: "text-secondary",
-                })
-            );
+            let hasDiver = feature.properties.with_diver ? "pulsing" : "";
+            const authorNumber = feature.properties.quduq_raqa;
+            // const pulsatingIcon = generatePulsatingMarker(
+            //     hasDiver,
+            //     authorNumber
+            // );
+
+            layer
+                .setIcon(
+                    L.divIcon({
+                        html: `
+                    <span class="fa fa-circle text-secondary rounded-circle ${hasDiver}"></span>
+                    <small>${authorNumber}</small>`,
+                        className: ``,
+                    })
+                )
+                .on("click", (e) => {
+                    Object.assign(clickedWell, feature.properties);
+                    const wellModal =
+                        Modal.getOrCreateInstance("#modal-wellinfo");
+                    wellModal.show();
+                });
         },
     })
 );
@@ -440,10 +459,22 @@ function getSoilActivePotassiumInterpolation() {
             />
         </div>
         <p>Center is at {{ center }} and the zoom is: {{ zoom }}</p>
+
+        <!-- modals -->
+        <WellInfoModal :well="clickedWell" />
     </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.well-icon {
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #0000ff;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.7);
+}
+
 #left_control_block {
     // border: 2px solid lightgray;
     position: absolute;
@@ -451,6 +482,7 @@ function getSoilActivePotassiumInterpolation() {
     left: 1rem;
     z-index: 800;
 }
+
 #right_control_block {
     // border: 2px solid lightgray;
     position: absolute;
@@ -458,5 +490,40 @@ function getSoilActivePotassiumInterpolation() {
     right: 1rem;
     z-index: 800;
     width: 370px;
+}
+
+.pulsing {
+    animation: pulsing 1s infinite;
+}
+
+@-webkit-keyframes pulsing {
+    0% {
+        -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    }
+
+    70% {
+        -webkit-box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    }
+
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+}
+
+@keyframes pulsing {
+    0% {
+        -moz-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    }
+
+    70% {
+        -moz-box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+        box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    }
+
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
 }
 </style>

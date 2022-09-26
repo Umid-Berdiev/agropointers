@@ -10,6 +10,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 1,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 118.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -27,6 +29,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 2,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 120.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Тошкент СИУ",
@@ -44,6 +48,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 3,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 121.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Тошкент СИУ",
@@ -61,6 +67,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 4,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 125.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Тошкент СИУ",
@@ -78,6 +86,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 5,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 126.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Тошкент СИУ",
@@ -95,6 +105,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 6,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 127.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Тошкент СИУ",
@@ -112,6 +124,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 7,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 128.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Тошкент СИУ",
@@ -129,6 +143,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 8,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 129.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -146,6 +162,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 9,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 130.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -163,6 +181,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 10,
+                "cadaster_num": "02-2-08-04-5-223-13-131",
+                "with_diver": true,
                 "quduq_raqa": 131.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -180,6 +200,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 11,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 132.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -197,6 +219,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 12,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 133.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -214,6 +238,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 13,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 134.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -231,6 +257,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 14,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 135.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -248,6 +276,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 15,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 123.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -265,6 +295,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 16,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 138.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -282,6 +314,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 17,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 139.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -299,6 +333,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 18,
+                "cadaster_num": "02-2-08-04-5-223-13-140",
+                "with_diver": true,
                 "quduq_raqa": 140.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -316,6 +352,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 19,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 141.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -333,6 +371,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 20,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 143.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -350,6 +390,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 21,
+                "cadaster_num": "02-2-08-04-5-223-13-144",
+                "with_diver": true,
                 "quduq_raqa": 144.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -367,6 +409,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 22,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 137.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -384,6 +428,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 23,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 145.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -401,6 +447,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 24,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 146.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -418,6 +466,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 25,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 117.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -435,6 +485,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 26,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 147.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -452,6 +504,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 27,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 148.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -469,6 +523,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 28,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 119.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -486,6 +542,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 29,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 124.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -503,6 +561,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 30,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 149.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -520,6 +580,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 31,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 150.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -537,6 +599,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 32,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 151.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -554,6 +618,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 33,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 122.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -571,6 +637,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 34,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 152.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -588,6 +656,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 35,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 153.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -605,6 +675,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 36,
+                "cadaster_num": "02-2-08-04-5-223-13-154",
+                "with_diver": true,
                 "quduq_raqa": 154.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -622,6 +694,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 37,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 155.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -639,6 +713,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 38,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 156.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -656,6 +732,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 39,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 157.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -673,6 +751,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 40,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 158.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -690,6 +770,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 41,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 159.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -707,6 +789,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 42,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 160.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -724,6 +808,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 43,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 161.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -741,6 +827,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 44,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 162.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -758,6 +846,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 45,
+                "cadaster_num": "02-2-08-04-5-223-13-163",
+                "with_diver": true,
                 "quduq_raqa": 163.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -775,6 +865,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 46,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 136.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -792,6 +884,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 47,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 164.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -809,6 +903,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 48,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 165.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -826,6 +922,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 49,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 166.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -843,6 +941,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 50,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 167.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -860,6 +960,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 51,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 168.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -877,6 +979,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 52,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 169.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -894,6 +998,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 53,
+                "cadaster_num": "02-2-08-04-5-223-13-170",
+                "with_diver": true,
                 "quduq_raqa": 170.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
@@ -911,6 +1017,8 @@
             "type": "Feature",
             "properties": {
                 "OBJECTID": 54,
+                "cadaster_num": "",
+                "with_diver": false,
                 "quduq_raqa": 142.0,
                 "Tuman_nomi": "Мирзачул тумани",
                 "СИУ_н": "Пахтазор СИУ",
