@@ -66,37 +66,6 @@ onUnmounted(() => {
                                 <i class="fa fa-fw fa-ellipsis-v"></i>
                             </button>
                             <!-- END Toggle Mini Sidebar -->
-
-                            <!-- Open Search Section (visible on smaller screens) -->
-                            <button
-                                type="button"
-                                class="btn btn-sm btn-alt-secondary d-md-none"
-                                @click="store.headerSearch({ mode: 'on' })"
-                            >
-                                <i class="fa fa-fw fa-search"></i>
-                            </button>
-                            <!-- END Open Search Section -->
-
-                            <!-- Search Form (visible on larger screens) -->
-                            <form
-                                class="d-none d-md-inline-block"
-                                @submit.prevent="onSubmitSearch"
-                            >
-                                <div class="input-group input-group-sm">
-                                    <input
-                                        type="text"
-                                        class="form-control form-control-alt"
-                                        placeholder="Search.."
-                                        id="page-header-search-input2"
-                                        name="page-header-search-input2"
-                                        v-model="baseSearchTerm"
-                                    />
-                                    <span class="input-group-text border-0">
-                                        <i class="fa fa-fw fa-search"></i>
-                                    </span>
-                                </div>
-                            </form>
-                            <!-- END Search Form -->
                         </slot>
                     </div>
                     <!-- END Left Section -->
@@ -300,18 +269,6 @@ onUnmounted(() => {
                                 </div>
                             </div>
                             <!-- END Notifications Dropdown -->
-
-                            <!-- Toggle Side Overlay -->
-                            <button
-                                type="button"
-                                class="btn btn-sm btn-alt-secondary ms-2"
-                                @click="store.sideOverlay({ mode: 'toggle' })"
-                            >
-                                <i
-                                    class="fa fa-fw fa-list-ul fa-flip-horizontal"
-                                ></i>
-                            </button>
-                            <!-- END Toggle Side Overlay -->
                         </slot>
                     </div>
                     <!-- END Right Section -->

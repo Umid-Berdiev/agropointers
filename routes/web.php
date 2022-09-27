@@ -66,7 +66,8 @@ Route::get('groundwater-mineralization/export/', [GroundwaterMineralizationPoint
 Route::get('groundwater-level/export/', [GroundwaterLevelPointerController::class, 'export'])->name('level.export');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], function () {
-    Route::get('/dashboard', fn () => Inertia::render('Dashboard'))
+    Route::get('/', fn () => redirect(route('admin.soil_data')));
+    Route::get('/dashboard', fn () => redirect(route('admin.soil_data')))
         ->name('dashboard');
 
     Route::get('soil_data', [SoilDataController::class, 'index'])
@@ -116,7 +117,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], functi
     Route::resource('qw_mineralization_pointers', GroundwaterMineralizationPointerController::class);
 
     // dealing with shapefiles
-    Route::get('static-data', [StaticDataController::class, 'index'])->name('static-data.index');
+    // Route::get('static-data', [StaticDataController::class, 'index'])->name('static-data.index');
     Route::post('populated-areas/import/shapefile', [PopulatedAreaController::class, 'importShapefile'])->name('populated-areas.import.shapefile');
     Route::resource('populated-areas', PopulatedAreaController::class);
 });

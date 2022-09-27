@@ -6,11 +6,11 @@
 
 export default {
     main: [
-        {
-            name: "Dashboard",
-            to: "/admin/dashboard",
-            icon: "si si-speedometer",
-        },
+        // {
+        //     name: "Dashboard",
+        //     to: "/admin/dashboard",
+        //     icon: "si si-speedometer",
+        // },
         {
             name: "Soil data",
             to: "/admin/soil_data",
@@ -21,11 +21,11 @@ export default {
             to: "/admin/groundwater_data",
             icon: "si si-drop",
         },
-        {
-            name: "Static data",
-            to: "/admin/static-data",
-            icon: "si si-flag",
-        },
+        // {
+        //     name: "Static data",
+        //     to: "/admin/static-data",
+        //     icon: "si si-flag",
+        // },
         // {
         //     name: "Static data",
         //     to: "/admin/static_data",
