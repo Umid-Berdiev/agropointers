@@ -103,7 +103,7 @@ function formatDate(dateString) {
 <template>
     <div>
         <h5>Diver station id: {{ diverStationId }}</h5>
-        <table class="table table-sm table-hover table-bordered">
+        <table class="table table-sm small table-hover table-bordered">
             <thead class="text-center">
                 <tr>
                     <th v-text="'Date'" />
@@ -114,7 +114,7 @@ function formatDate(dateString) {
             </thead>
             <tbody>
                 <tr v-for="(item, index) in diverInfo" :key="index">
-                    <td v-text="formatDate(item.vaqt)" />
+                    <td class="text-center" v-text="formatDate(item.vaqt)" />
                     <td class="text-end" v-text="item.mineral" />
                     <td class="text-end" v-text="item.level" />
                     <td class="text-end" v-text="item.temperatura" />

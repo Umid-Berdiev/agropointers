@@ -18,7 +18,7 @@ const props = defineProps({
         aria-labelledby="modal-wellinfo"
         aria-hidden="true"
     >
-        <div class="modal-dialog modal-dialog-popout modal-dialog-scrollable" role="document">
+        <div class="modal-dialog modal-dialog-popout" role="document">
             <div class="modal-content p-3">
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -91,7 +91,9 @@ const props = defineProps({
                             </li>
                             <li class="list-group-item d-flex">
                                 <span>mgv_07_21</span>
-                                <span class="ms-auto">{{ well.mgv_07_21 }}</span>
+                                <span class="ms-auto">{{
+                                    well.mgv_07_21
+                                }}</span>
                             </li>
                         </ul>
                     </div>
