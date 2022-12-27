@@ -115,9 +115,9 @@ function formatDate(dateString) {
             <tbody>
                 <tr v-for="(item, index) in diverInfo" :key="index">
                     <td v-text="formatDate(item.vaqt)" />
-                    <td class="text-right" v-text="item.mineral" />
-                    <td class="text-right" v-text="item.level" />
-                    <td class="text-right" v-text="item.temperatura" />
+                    <td class="text-end" v-text="item.mineral" />
+                    <td class="text-end" v-text="item.level" />
+                    <td class="text-end" v-text="item.temperatura" />
                 </tr>
             </tbody>
         </table>
