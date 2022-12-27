@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watchEffect } from "vue";
-import { useStorage } from "@vueuse/core";
+import { formatDate, useStorage } from "@vueuse/core";
 import { useNotyf } from "../composable/useNotyf";
 import moment from "moment";
 import axios from "axios";
@@ -104,7 +104,9 @@ async function getDiverToken() {
             </thead>
             <tbody>
                 <tr v-for="(item, index) in diverInfo" :key="index">
-                    <td v-text="$h.formatDate(item.vaqt, 'DD-MM-YYYY')" />
+                    <td
+                        v-text="formatDate(new Date(item.vaqt), 'DD-MM-YYYY')"
+                    />
                     <td class="text-right" v-text="item.mineral" />
                     <td class="text-right" v-text="item.level" />
                     <td class="text-right" v-text="item.temperatura" />
