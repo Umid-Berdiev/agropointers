@@ -43,6 +43,9 @@ async function onChange() {
             notyf.error(res.data.message);
         } else {
             diverStationId.value = res.data[0]?.st_id || "";
+            const resData = res.data ?? [];
+            const reversedData = resData.slice(-31).reverse();
+            diverInfo.value = reversedData;
         }
     } catch (error) {
         notyf.error(error.message);
@@ -89,6 +92,7 @@ async function getDiverToken() {
 
 <template>
     <div>
+        <h5>Diver station id: {{ diverStationId }}</h5>
         <table class="table table-sm table-hover table-bordered">
             <thead class="text-center">
                 <tr>
